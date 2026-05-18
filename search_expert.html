@@ -80,7 +80,18 @@
         .chat-input button:hover { background: var(--gbr-secondary-dark); }
         @media (max-width: 1200px) { .main-section { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px; } }
         @media (max-width: 992px) { .search-body { grid-template-columns: 1fr 1fr; } .results-count { grid-column: auto; } .main-section { grid-template-columns: 1fr; } }
-        @media (max-width: 576px) { .search-header { flex-wrap: wrap; gap: 12px; } .search-body { grid-template-columns: 1fr; } }
+        @media (max-width: 576px) {
+            .greeting-strip { flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
+            .hero-row { padding: 0 14px 14px; }
+            .search-header { flex-wrap: wrap; gap: 10px; padding: 10px 14px; font-size: 13px; }
+            .search-body { grid-template-columns: 1fr; padding: 14px; gap: 12px; }
+            .main-section { padding: 16px 14px; gap: 18px; }
+            .field-grid { grid-template-columns: max-content 12px 1fr; }
+            .revenue-row { grid-template-columns: max-content 12px 1fr; flex-wrap: wrap; }
+            .field-inline { grid-template-columns: max-content 12px 1fr; }
+            .get-in-touch { flex-wrap: wrap; gap: 12px; }
+            .contact-id { font-size: 13px; }
+        }
     </style>
 </head>
 <body>
