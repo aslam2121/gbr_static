@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GBR | Registration Confirmation</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Poppins.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/bootstrap_theme/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/blocks.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        :root {
+            --gbr-primary: #043443; --gbr-primary-700: #032a36;
+            --gbr-secondary: #0083ae; --gbr-secondary-dark: #046c8e;
+            --gbr-light-gray: #e6e7e8;
+            --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+            --shadow-card: 0 .125rem .25rem rgba(0,0,0,.06);
+        }
+        body { font-family: var(--font-sans); color: #212529; background: #fff; margin: 0; }
+
+        /* Welcome strip */
+        .welcome-strip { background: var(--gbr-light-gray); padding: 14px 26px 16px; display: flex; align-items: flex-start; gap: 14px; }
+        .welcome-text { font-weight: 600; font-size: 18px; margin: 6px 0 0; color: var(--gbr-primary); }
+        .login-wrap { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+        .login-form { display: flex; align-items: flex-end; gap: 8px; }
+        .login-form .field { display: flex; flex-direction: column; }
+        .login-form .field-label { font-size: 12px; color: var(--gbr-secondary); margin: 0 0 2px; font-weight: 500; }
+        .login-input { border: 1px solid #b6bcc0; padding: 5px 8px; font-size: 13px; width: 140px; background: #fff; font-family: inherit; }
+        .btn-signin { background: var(--gbr-secondary); color: #fff; border: 0; padding: 6px 16px; font-size: 14px; }
+        .btn-signin:hover { background: var(--gbr-secondary-dark); }
+        .forgot-link { font-size: 12px; color: var(--gbr-secondary); text-decoration: none; }
+        .forgot-link:hover { text-decoration: underline; }
+
+        /* Hero row */
+        .hero-row { background: var(--gbr-light-gray); padding: 0 26px 22px; }
+        .hero-row .row { margin: 0; }
+        .hero-card { background: #fff; box-shadow: var(--shadow-card); padding: 22px; height: 200px; display: flex; flex-direction: column; justify-content: center; }
+        .hero-card-1 { align-items: center; text-align: center; }
+        .hero-card-1 .tagline { font-size: 17px; font-weight: 500; margin: 0 0 10px; color: var(--gbr-primary); }
+        .hero-card-1 img { max-width: 170px; height: auto; }
+        .hero-card h3 { font-size: 17px; font-weight: 600; color: var(--gbr-primary); margin: 0 0 6px; }
+        .hero-card p { font-size: 12.5px; line-height: 1.45; color: #212529; margin: 0; }
+        .hero-card-3 { text-align: center; align-items: center; }
+        .hero-card-3 h3 { color: var(--gbr-secondary); font-size: 22px; font-weight: 600; margin: 0 0 2px; }
+        .hero-card-3 .sub { font-size: 13px; color: #212529; margin: 0 0 8px; }
+        .hero-card-3 .blurb { font-size: 12px; line-height: 1.4; margin: 0 0 10px; }
+        .btn-join { background: var(--gbr-secondary); color: #fff; border: 0; padding: 8px 22px; font-size: 15px; font-weight: 500; }
+        .btn-join:hover { background: var(--gbr-secondary-dark); color: #fff; }
+
+        /* Main 3-column grid */
+        .reg-main { padding: 30px 26px 50px; display: grid; grid-template-columns: 320px 1fr 320px; gap: 24px; background: #fff; }
+
+        /* Left pin block */
+        .pin-block { background: #ebeded; min-height: 500px; display: flex; align-items: center; justify-content: center; }
+        .pin-block svg { width: 170px; height: 170px; opacity: 0.55; }
+
+        /* Confirmation center */
+        .confirmation { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 500px; text-align: center; padding: 40px 20px; }
+        .confirm-headline { color: var(--gbr-secondary); font-size: 18px; font-weight: 600; margin: 0; }
+        .confirm-sub { color: var(--gbr-secondary); font-size: 16px; font-weight: 500; margin: 0 0 22px; }
+        .confirm-body { color: var(--gbr-secondary); font-size: 13px; line-height: 1.55; max-width: 460px; margin: 0; }
+
+        /* Bottom register button */
+        .bottom-register { text-align: center; padding: 14px 0 40px; background: #fff; }
+        .btn-submit { background: var(--gbr-secondary); color: #fff; border: 0; padding: 9px 40px; font-size: 16px; font-weight: 500; }
+        .btn-submit:hover { background: var(--gbr-secondary-dark); color: #fff; }
+
+        /* Right rail */
+        .right-rail { display: flex; flex-direction: column; gap: 14px; }
+        .promo-photo { width: 100%; aspect-ratio: 4/3.6; background: #d8dde0; position: relative; overflow: hidden; border: 1px solid #e3e6e8; }
+        .promo-photo .photo-bg { position: absolute; inset: 0; background-position: 80% center; background-size: cover; background-repeat: no-repeat; }
+        .promo-photo .photo-fade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(245,247,248,0.96) 0%, rgba(245,247,248,0.88) 38%, rgba(245,247,248,0) 62%); }
+        .promo-photo .logo-overlay { position: absolute; top: 14px; left: 14px; max-width: 110px; z-index: 2; }
+        .promo-photo .photo-text { position: absolute; top: 78px; left: 14px; color: var(--gbr-primary); font-size: 22px; font-weight: 600; line-height: 1.15; max-width: 55%; margin: 0; z-index: 2; }
+
+        /* Chat card */
+        .chat-card { background: #fff; box-shadow: var(--shadow-card); border: 1px solid #e3e6e8; }
+        .chat-head { background: var(--gbr-secondary); color: #fff; padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .chat-head .dot { width: 9px; height: 9px; border-radius: 50%; background: #59d27d; box-shadow: 0 0 0 2px rgba(255,255,255,.4); }
+        .chat-head .who { flex: 1; font-weight: 500; }
+        .chat-head .actions { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        .chat-body { padding: 14px 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+        .bubble { max-width: 82%; padding: 9px 12px; font-size: 13.5px; line-height: 1.45; border-radius: 0; }
+        .bubble-them { background: var(--gbr-secondary); color: #fff; align-self: flex-start; }
+        .bubble-me { background: #fff; color: #212529; align-self: flex-end; border: 1px solid #d6dadd; text-align: right; }
+        .chat-input { background: #f7f7f7; display: flex; align-items: stretch; border-top: 1px solid #e3e6e8; }
+        .chat-input input { flex: 1; border: 0; background: transparent; padding: 11px 12px; font-size: 13px; color: #495057; outline: none; font-family: inherit; }
+        .chat-input button { background: var(--gbr-secondary); color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+        .chat-input button:hover { background: var(--gbr-secondary-dark); }
+
+        @media (max-width: 1200px) { .reg-main { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px 40px; } }
+        @media (max-width: 992px) { .reg-main { grid-template-columns: 1fr; } .pin-block { min-height: 200px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+
+    <!-- Welcome strip -->
+    <div class="welcome-strip">
+        <p class="welcome-text">Welcome to GBR!</p>
+        <div class="login-wrap">
+            <form class="login-form" onsubmit="event.preventDefault()">
+                <div class="field"><label class="field-label">Member Login</label></div>
+                <input class="login-input" type="text" placeholder="Username" />
+                <input class="login-input" type="password" placeholder="Password" />
+                <button class="btn-signin" type="submit">Sign in</button>
+            </form>
+            <a class="forgot-link" href="#">Forgot your password?</a>
+        </div>
+    </div>
+
+    <!-- Hero row -->
+    <div class="hero-row">
+        <div class="row g-3">
+            <div class="col-lg-4">
+                <div class="hero-card hero-card-1">
+                    <p class="tagline">Your business highway to opportunities</p>
+                    <img src="assets/img/gbr_logo_blue.png" alt="GBR" />
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="hero-card">
+                    <h3>Take your business meetings to next level.</h3>
+                    <p>You can find new investors/companies, this is a dummy text and needs to replace with original which is finalised according to the subject. You can find new investors/companies, this is a dummy text and needs to replace with original which is finalised according to the subject.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="hero-card hero-card-3">
+                    <h3>Join now!!</h3>
+                    <p class="sub">to take the advantageous of networking</p>
+                    <p class="blurb">Please do register to open the window of opportunities to find New investors/clients and companies. Let your business fly!!</p>
+                    <button class="btn-join" type="button">Yes! I want to join now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main 3-column -->
+    <main>
+        <section class="reg-main">
+
+            <!-- Left: pin block -->
+            <aside class="pin-block">
+                <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M100 10 C 55 10, 25 45, 25 90 C 25 145, 100 270, 100 270 C 100 270, 175 145, 175 90 C 175 45, 145 10, 100 10 Z M100 65 C 115 65, 130 80, 130 95 C 130 110, 115 125, 100 125 C 85 125, 70 110, 70 95 C 70 80, 85 65, 100 65 Z" fill="none" stroke="#b8bdc1" stroke-width="3"/>
+                </svg>
+            </aside>
+
+            <!-- Center: confirmation message -->
+            <article>
+                <div class="confirmation">
+                    <p class="confirm-headline">Congratulations!</p>
+                    <p class="confirm-sub">You got registered.</p>
+                    <p class="confirm-body">*You will be receiving a mail, containing "username" and password to access your GBR account within 24 hours after registration. If not then please contact us at "customer@gbroots.com"</p>
+                </div>
+            </article>
+
+            <!-- Right rail: promo image + chat -->
+            <aside class="right-rail">
+                <div class="promo-photo">
+                    <div class="photo-bg" style="background-image: url('assets/img/sidebar_image.jpg');"></div>
+                    <div class="photo-fade"></div>
+                    <img src="assets/img/gbr_logo_blue.png" alt="" class="logo-overlay" />
+                    <p class="photo-text">Meet the business personnels virtually</p>
+                </div>
+
+                <div class="chat-card">
+                    <div class="chat-head">
+                        <span class="dot"></span>
+                        <span class="who">+00290-Rubin</span>
+                        <span class="actions">
+                            <i class="bi bi-chat-dots"></i>
+                            <i class="bi bi-camera-video"></i>
+                            <i class="bi bi-paperclip"></i>
+                            <i class="bi bi-square"></i>
+                            <i class="bi bi-dash"></i>
+                        </span>
+                    </div>
+                    <div class="chat-body">
+                        <div class="bubble bubble-them">Hello<br>How are you!</div>
+                        <div class="bubble bubble-me">Hello<br>How are you!</div>
+                        <div class="bubble bubble-them">Regarding the proposed project we need to discuss further to make sure everything as on our plan, when its possible</div>
+                        <div class="bubble bubble-me">According to your company policies we will be able to do that if it works well for us too</div>
+                    </div>
+                    <form class="chat-input" onsubmit="event.preventDefault()">
+                        <input type="text" placeholder="Type a message..." />
+                        <button type="submit" aria-label="Send"><i class="bi bi-send-fill"></i></button>
+                    </form>
+                </div>
+            </aside>
+        </section>
+
+        <div class="bottom-register">
+            <button class="btn-submit" type="button">Register</button>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GBR | Search Expert</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Poppins.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/bootstrap_theme/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/blocks.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        :root { --gbr-primary:#043443; --gbr-secondary:#0083ae; --gbr-secondary-dark:#046c8e; --gbr-light-gray:#e6e7e8; --font-sans:'Poppins',system-ui,sans-serif; --shadow-card:0 .125rem .25rem rgba(0,0,0,.06); }
+        body { font-family: var(--font-sans); color: #212529; background: #fff; }
+        .greeting-strip { background: var(--gbr-light-gray); padding: 14px 26px; display: flex; align-items: center; gap: 14px; }
+        .greeting-avatar { width: 44px; height: 44px; border-radius: 6px; background: #cdd6d9; overflow: hidden; flex: 0 0 44px; }
+        .greeting-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .greeting-name { font-size: 18px; font-weight: 600; margin: 0; }
+        .btn-signout { background: var(--gbr-secondary); color: #fff; border: 0; padding: 4px 14px; font-size: 13px; border-radius: 3px; cursor: pointer; }
+        .btn-signout:hover { background: var(--gbr-secondary-dark); }
+        .hero-row { background: var(--gbr-light-gray); padding: 0 26px 22px; }
+        .hero-card { background: #fff; box-shadow: var(--shadow-card); padding: 26px 22px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .hero-card .tagline { font-size: 18px; font-weight: 500; margin-bottom: 14px; color: #212529; }
+        .hero-card img { max-width: 180px; height: auto; }
+        .search-header { background: var(--gbr-secondary); color: #fff; padding: 12px 22px; display: flex; align-items: center; gap: 30px; font-size: 14px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; }
+        .search-header .role-toggle { display: flex; align-items: center; gap: 8px; font-weight: 400; text-transform: capitalize; font-size: 15px; cursor: pointer; }
+        .search-header .role-toggle .box { width: 18px; height: 18px; background: #fff; border: 1px solid rgba(0,0,0,.1); display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); flex-shrink: 0; }
+        .search-header .role-toggle .box i { font-size: 14px; line-height: 1; }
+        .search-body { background: #f3f4f5; padding: 18px 22px 22px; display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px 30px; align-items: end; }
+        .field-label { color: var(--gbr-secondary); font-size: 15px; font-weight: 500; margin: 0 0 4px; }
+        .gbr-select { width: 100%; padding: 7px 30px 7px 10px; font-size: 14px; border: 1px solid #b6bcc0; background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%3E%3Cpolygon%20points%3D%220%2C0%2010%2C0%205%2C6%22%20fill%3D%22%23495057%22%2F%3E%3C%2Fsvg%3E") right 10px center no-repeat; -webkit-appearance: none; appearance: none; border-radius: 0; color: #212529; }
+        .btn-search { background: var(--gbr-secondary); color: #fff; border: 0; padding: 8px 28px; font-size: 15px; font-weight: 500; border-radius: 3px; min-width: 140px; cursor: pointer; }
+        .btn-search:hover { background: var(--gbr-secondary-dark); }
+        .results-count { grid-column: 3; color: var(--gbr-secondary); font-size: 14px; text-align: center; line-height: 1.4; }
+        .main-section { padding: 34px 26px; display: grid; grid-template-columns: 250px 1fr 320px; gap: 24px; background: #fff; }
+        .contacts-tabs { display: flex; }
+        .contacts-tab { flex: 1; padding: 10px 12px; text-align: center; background: var(--gbr-secondary); color: #fff; font-size: 14px; font-weight: 500; cursor: pointer; border: 0; }
+        .contacts-tab.active { background: var(--gbr-primary); }
+        .contacts-list { background: #f3f4f5; padding: 8px 0; }
+        .contact-item { padding: 10px 14px; border-bottom: 1px solid transparent; cursor: pointer; }
+        .contact-item:hover { background: #dde8ec; }
+        .contact-item.active { background: #cfe1e9; }
+        .contact-item .name { color: var(--gbr-secondary); font-weight: 500; font-size: 14px; margin: 0; }
+        .contact-item .meta { color: #495057; font-size: 13px; margin: 0; line-height: 1.35; }
+        .contact-id { color: var(--gbr-secondary); font-weight: 600; font-size: 15px; margin: 0 0 14px; }
+        .field-grid { display: grid; grid-template-columns: 200px 12px 1fr; gap: 4px 8px; font-size: 14px; margin-bottom: 18px; }
+        .field-grid .lbl { color: #212529; } .field-grid .col { color: #6c757d; } .field-grid .val { color: #212529; }
+        .section-title { font-size: 14px; font-weight: 600; margin: 18px 0 8px; color: #212529; }
+        .lorem { font-size: 13.5px; line-height: 1.55; color: #212529; margin-bottom: 4px; }
+        .revenue-row { display: grid; grid-template-columns: 200px 12px auto 1fr; gap: 8px; align-items: center; font-size: 14px; margin: 16px 0; }
+        .download-pill { display: inline-flex; align-items: center; gap: 8px; color: #212529; text-decoration: none; }
+        .field-inline { display: grid; grid-template-columns: 200px 12px 1fr; gap: 8px; font-size: 14px; margin: 6px 0; }
+        .get-in-touch { display: flex; align-items: center; gap: 18px; margin-top: 22px; }
+        .get-in-touch .gt-label { color: var(--gbr-secondary); font-weight: 500; font-size: 15px; }
+        .get-in-touch .gt-icon { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); font-size: 22px; border: 0; background: none; cursor: pointer; }
+        .right-rail { display: flex; flex-direction: column; gap: 14px; }
+        .member-rating { text-align: right; font-size: 13px; color: #212529; }
+        .member-rating .stars { color: var(--gbr-secondary); letter-spacing: 1px; }
+        .profile-photo { width: 100%; aspect-ratio: 4/3.7; background: #d8dde0 center/cover no-repeat; position: relative; overflow: hidden; border: 1px solid #e3e6e8; }
+        .profile-photo .watermark { position: absolute; left: 16px; bottom: 22px; max-width: 110px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.15)); }
+        .chat-card { background: #fff; box-shadow: var(--shadow-card); border: 1px solid #e3e6e8; }
+        .chat-head { background: var(--gbr-secondary); color: #fff; padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .chat-head .dot { width: 9px; height: 9px; border-radius: 50%; background: #59d27d; box-shadow: 0 0 0 2px rgba(255,255,255,.4); flex-shrink: 0; }
+        .chat-head .who { flex: 1; font-weight: 500; }
+        .chat-head .actions { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        .chat-head .actions i { cursor: pointer; }
+        .chat-body { padding: 14px 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+        .bubble { max-width: 82%; padding: 9px 12px; font-size: 13.5px; line-height: 1.45; border-radius: 0; }
+        .bubble-them { background: var(--gbr-secondary); color: #fff; align-self: flex-start; }
+        .bubble-me { background: #fff; color: #212529; align-self: flex-end; border: 1px solid #d6dadd; text-align: right; }
+        .chat-input { background: #f7f7f7; display: flex; align-items: stretch; border-top: 1px solid #e3e6e8; }
+        .chat-input input { flex: 1; border: 0; background: transparent; padding: 11px 12px; font-size: 13px; color: #495057; outline: none; font-family: inherit; }
+        .chat-input button { background: var(--gbr-secondary); color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .chat-input button:hover { background: var(--gbr-secondary-dark); }
+        @media (max-width: 1200px) { .main-section { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px; } }
+        @media (max-width: 992px) { .search-body { grid-template-columns: 1fr 1fr; } .results-count { grid-column: auto; } .main-section { grid-template-columns: 1fr; } }
+        @media (max-width: 576px) { .search-header { flex-wrap: wrap; gap: 12px; } .search-body { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header><div id="navbar-placeholder"></div></header>
+    <main>
+        <div class="greeting-strip">
+            <div class="greeting-avatar"><img src="assets/img/sidebar_image.jpg" alt="User avatar" style="object-position:60% 22%;" /></div>
+            <p class="greeting-name">Hello Maxim!</p>
+            <div class="ms-auto"><button class="btn-signout" type="button">Sign out</button></div>
+        </div>
+        <div class="hero-row">
+            <div class="row g-3 align-items-stretch">
+                <div class="col-lg-4"><div class="hero-card"><p class="tagline">Your business highway to opportunities</p><img src="assets/img/gbr_logo_blue.png" alt="GBR" /></div></div>
+                <div class="col-lg-8">
+                    <div>
+                        <div class="search-header">
+                            <span>SEARCH FOR NEW CONTACTS</span>
+                            <label class="role-toggle">Company <span class="box"></span></label>
+                            <label class="role-toggle">Investor <span class="box"></span></label>
+                            <label class="role-toggle">Expert <span class="box"><i class="bi bi-check2"></i></span></label>
+                        </div>
+                        <div class="search-body">
+                            <div><p class="field-label">Continent</p><select class="gbr-select"><option>Africa</option><option>Europe</option><option>Asia</option><option>Americas</option><option>Oceania</option></select></div>
+                            <div><p class="field-label">Country</p><select class="gbr-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Egypt</option></select></div>
+                            <button class="btn-search" type="button">Search</button>
+                            <div><p class="field-label">Location</p><select class="gbr-select"><option>Cape Town</option><option>Johannesburg</option><option>Durban</option></select></div>
+                            <div><p class="field-label">Field of Expertise</p><select class="gbr-select"><option>Economics</option><option>Politics</option><option>Law</option></select></div>
+                            <p class="results-count m-0">We found <strong>28 Results</strong><br/>for Expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="main-section">
+            <aside>
+                <div class="contacts-tabs"><button class="contacts-tab active" type="button">Contacts</button><button class="contacts-tab" type="button">Search Results</button></div>
+                <div class="contacts-list">
+                    <div class="contact-item"><p class="name">Elizabeth Silver</p><p class="meta">South Africa</p><p class="meta">Economics</p></div>
+                    <div class="contact-item"><p class="name">Claudia Johnson</p><p class="meta">South Africa</p><p class="meta">Law</p></div>
+                    <div class="contact-item active"><p class="name">Vivian</p><p class="meta">South Africa</p><p class="meta">Economics</p></div>
+                    <div class="contact-item"><p class="name">Markose Stone</p><p class="meta">South Africa</p><p class="meta">Politics</p></div>
+                    <div class="contact-item"><p class="name">Narayanan</p><p class="meta">South Africa</p><p class="meta">Economics</p></div>
+                    <div class="contact-item"><p class="name">Francis Stephan</p><p class="meta">South Africa</p><p class="meta">Law</p></div>
+                    <div class="contact-item"><p class="name">Abdul Karim</p><p class="meta">South Africa</p><p class="meta">Politics</p></div>
+                    <div class="contact-item"><p class="name">Rustam Bababyev</p><p class="meta">South Africa</p><p class="meta">Economics</p></div>
+                    <div class="contact-item"><p class="name">Crown Enterprises</p><p class="meta">South Africa</p><p class="meta">Economics</p></div>
+                    <div class="contact-item"><p class="name">Monova Co.</p><p class="meta">South Africa</p><p class="meta">Law</p></div>
+                    <div class="contact-item"><p class="name">Lisbon Carb</p><p class="meta">South Africa</p><p class="meta">Politics</p></div>
+                    <div class="contact-item"><p class="name">Motor Dive</p></div>
+                </div>
+            </aside>
+            <article>
+                <p class="contact-id">Contact ID : +00598EXP</p>
+                <div class="field-grid">
+                    <span class="lbl">Name of the Expert</span><span class="col">:</span><span class="val">Vivian</span>
+                    <span class="lbl">Continent</span><span class="col">:</span><span class="val">Africa</span>
+                    <span class="lbl">Country</span><span class="col">:</span><span class="val">South Africa</span>
+                    <span class="lbl">Date of Birth</span><span class="col">:</span><span class="val">1981</span>
+                    <span class="lbl">Location</span><span class="col">:</span><span class="val">South Africa</span>
+                    <span class="lbl">Field of Expertise</span><span class="col">:</span><span class="val">Economics</span>
+                    <span class="lbl">Specialisation</span><span class="col">:</span><span class="val">Financial analyst</span>
+                    <span class="lbl">Years of experience</span><span class="col">:</span><span class="val">12</span>
+                    <span class="lbl">Consultation fee/hour</span><span class="col">:</span><span class="val">$50</span>
+                </div>
+                <p class="section-title">Experience details</p>
+                <p class="lorem">Financial Analysis, Auditing, Dummy text, Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text</p>
+                <div class="revenue-row">
+                    <span>CV/Biography</span>
+                    <span style="color:#6c757d;">:</span>
+                    <a href="#" class="download-pill">
+                        <svg width="22" height="26" viewBox="0 0 22 26" aria-hidden="true"><path d="M3 1h10l6 6v18H3V1zm9 1v6h6" stroke="#0083ae" stroke-width="1.5" fill="none"/><path d="M11 11v8m0 0l-4-4m4 4l4-4" stroke="#0083ae" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                        Click here to download
+                    </a>
+                </div>
+                <p class="section-title">Short description about the Expert</p>
+                <p class="lorem">Dummy Test, Financial Analysis, Auditing, Dummy text, Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text Financial Analysis, Auditing, Dummy text</p>
+                <div class="field-inline" style="margin-top:14px;">
+                    <span class="lbl">Email</span><span style="color:#6c757d;">:</span><span>vivian@example.com</span>
+                    <span class="lbl">Telephone/Mobile</span><span style="color:#6c757d;">:</span><span>0027 75558090 / 56565900</span>
+                </div>
+                <div class="get-in-touch">
+                    <span class="gt-label">Get in touch</span>
+                    <button class="gt-icon" type="button" aria-label="Email"><i class="bi bi-envelope"></i></button>
+                    <button class="gt-icon" type="button" aria-label="Message"><i class="bi bi-chat-dots"></i></button>
+                    <button class="gt-icon" type="button" aria-label="Video"><i class="bi bi-camera-video"></i></button>
+                </div>
+            </article>
+            <aside class="right-rail">
+                <p class="member-rating">Member rating: <span class="stars">&#9733;&#9733;&#9733;&#9733;</span></p>
+                <div class="profile-photo" style="background-image: url('assets/img/sidebar_image.jpg');"><img src="assets/img/gbr_logo_blue.png" alt="" class="watermark" /></div>
+                <div class="chat-card">
+                    <div class="chat-head"><span class="dot"></span><span class="who">+00290-Rubin</span><span class="actions"><i class="bi bi-chat-dots" title="Message"></i><i class="bi bi-camera-video" title="Video"></i><i class="bi bi-paperclip" title="Attach"></i><i class="bi bi-square" title="Maximize"></i><i class="bi bi-dash" title="Minimize"></i></span></div>
+                    <div class="chat-body">
+                        <div class="bubble bubble-them">Hello<br/>How are you!</div>
+                        <div class="bubble bubble-me">Hello<br/>How are you!</div>
+                        <div class="bubble bubble-them">Regarding the proposed project we need to discuss further to make sure everything as on our plan, when its possible</div>
+                        <div class="bubble bubble-me">According to your company policies we will be able to do that if it works well for us too</div>
+                    </div>
+                    <form class="chat-input" onsubmit="event.preventDefault()"><input type="text" placeholder="Type a message..." /><button type="submit" aria-label="Send"><i class="bi bi-send-fill"></i></button></form>
+                </div>
+            </aside>
+        </section>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>

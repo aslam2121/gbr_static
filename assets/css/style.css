@@ -1,0 +1,187 @@
+/* Start Map */
+
+#map {
+  height: 800px;
+  border: 2px solid #ccc;
+}
+
+/* End Map */
+
+/* Start Chat */
+
+#chat1 .form-outline .form-control ~ .form-notch div {
+  pointer-events: none;
+  border: 1px solid;
+  border-color: #eee;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+#chat1 .form-outline .form-control ~ .form-notch .form-notch-leading {
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-right: none;
+  border-radius: .65rem 0 0 .65rem;
+}
+
+#chat1 .form-outline .form-control ~ .form-notch .form-notch-middle {
+  flex: 0 0 auto;
+  max-width: calc(100% - 1rem);
+  height: 100%;
+  border-right: none;
+  border-left: none;
+}
+
+#chat1 .form-outline .form-control ~ .form-notch .form-notch-trailing {
+  flex-grow: 1;
+  height: 100%;
+  border-left: none;
+  border-radius: 0 .65rem .65rem 0;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-leading {
+  border-top: 0.125rem solid #39c0ed;
+  border-bottom: 0.125rem solid #39c0ed;
+  border-left: 0.125rem solid #39c0ed;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-leading, #chat1 .form-outline .form-control.active ~ .form-notch .form-notch-leading {
+  border-right: none;
+  transition: all 0.2s linear;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-middle {
+  border-bottom: 0.125rem solid;
+  border-color: #39c0ed;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-middle, #chat1 .form-outline .form-control.active ~ .form-notch .form-notch-middle {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  transition: all 0.2s linear;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-trailing {
+  border-top: 0.125rem solid #39c0ed;
+  border-bottom: 0.125rem solid #39c0ed;
+  border-right: 0.125rem solid #39c0ed;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-notch .form-notch-trailing, #chat1 .form-outline .form-control.active ~ .form-notch .form-notch-trailing {
+  border-left: none;
+  transition: all 0.2s linear;
+}
+
+#chat1 .form-outline .form-control:focus ~ .form-label {
+  color: #39c0ed;
+}
+
+#chat1 .form-outline .form-control ~ .form-label {
+  color: #bfbfbf;
+}
+
+/* End Chat */
+
+/* ========== GBR Navbar ========== */
+.gbr-navbar {
+  background: #043443;
+  padding: 0;
+}
+.gbr-navbar .container-fluid {
+  padding: 14px 26px;
+}
+.gbr-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.gbr-navbar .navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+}
+.gbr-nav-link {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.1;
+  white-space: nowrap;
+  position: relative;
+}
+.gbr-nav-link i {
+  font-size: 22px;
+  line-height: 1;
+}
+.gbr-nav-link:hover { color: #cce6ef; }
+.gbr-nav-link.active { color: #cce6ef; opacity: 0.85; }
+.gbr-nav-link .badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: #dc3545;
+  border-radius: 50%;
+  border: 1.5px solid #043443;
+}
+.gbr-accent-rule {
+  height: 8px;
+  background: #0083ae;
+}
+
+/* Mobile collapse styling */
+@media (max-width: 991px) {
+  .gbr-navbar .navbar-collapse {
+    padding: 10px 0;
+  }
+  .gbr-navbar .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .gbr-nav-link {
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    white-space: normal;
+  }
+  .gbr-nav-link i { font-size: 18px; }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .gbr-nav-link { padding: 6px 10px; font-size: 11.5px; }
+  .gbr-nav-link i { font-size: 20px; }
+}
+/* ========== End GBR Navbar ========== */
+
+/* ========== GBR Footer ========== */
+.gbr-footer {
+  background: #e6e7e8;
+  padding: 18px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.gbr-footer img { height: 38px; }
+.gbr-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.gbr-footer a {
+  color: #0083ae;
+  text-decoration: none;
+  font-size: 15px;
+}
+.gbr-footer a:hover { color: #046c8e; text-decoration: underline; }
+/* ========== End GBR Footer ========== */
