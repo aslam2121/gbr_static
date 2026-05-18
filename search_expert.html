@@ -32,12 +32,12 @@
         .search-header .role-toggle { display: flex; align-items: center; gap: 8px; font-weight: 400; text-transform: capitalize; font-size: 15px; cursor: pointer; }
         .search-header .role-toggle .box { width: 18px; height: 18px; background: #fff; border: 1px solid rgba(0,0,0,.1); display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); flex-shrink: 0; }
         .search-header .role-toggle .box i { font-size: 14px; line-height: 1; }
-        .search-body { background: #f3f4f5; padding: 18px 22px 22px; display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px 30px; align-items: end; }
+        .search-body { background: #f3f4f5; padding: 18px 22px 22px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px 30px; align-items: end; }
         .field-label { color: var(--gbr-secondary); font-size: 15px; font-weight: 500; margin: 0 0 4px; }
         .gbr-select { width: 100%; padding: 7px 30px 7px 10px; font-size: 14px; border: 1px solid #b6bcc0; background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%3E%3Cpolygon%20points%3D%220%2C0%2010%2C0%205%2C6%22%20fill%3D%22%23495057%22%2F%3E%3C%2Fsvg%3E") right 10px center no-repeat; -webkit-appearance: none; appearance: none; border-radius: 0; color: #212529; }
-        .btn-search { background: var(--gbr-secondary); color: #fff; border: 0; padding: 8px 28px; font-size: 15px; font-weight: 500; border-radius: 3px; min-width: 140px; cursor: pointer; }
+        .btn-search { background: var(--gbr-secondary); color: #fff; border: 0; padding: 8px 28px; font-size: 15px; font-weight: 500; border-radius: 3px; min-width: 140px; cursor: pointer; align-self: end; }
         .btn-search:hover { background: var(--gbr-secondary-dark); }
-        .results-count { grid-column: 3; color: var(--gbr-secondary); font-size: 14px; text-align: center; line-height: 1.4; }
+        .results-count { color: var(--gbr-secondary); font-size: 14px; text-align: center; line-height: 1.4; }
         .main-section { padding: 34px 26px; display: grid; grid-template-columns: 250px 1fr 320px; gap: 24px; background: #fff; }
         .contacts-tabs { display: flex; }
         .contacts-tab { flex: 1; padding: 10px 12px; text-align: center; background: var(--gbr-secondary); color: #fff; font-size: 14px; font-weight: 500; cursor: pointer; border: 0; }
@@ -79,7 +79,7 @@
         .chat-input button { background: var(--gbr-secondary); color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .chat-input button:hover { background: var(--gbr-secondary-dark); }
         @media (max-width: 1200px) { .main-section { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px; } }
-        @media (max-width: 992px) { .search-body { grid-template-columns: 1fr 1fr; } .results-count { grid-column: auto; } .main-section { grid-template-columns: 1fr; } }
+        @media (max-width: 992px) { .search-body { grid-template-columns: 1fr 1fr; } .main-section { grid-template-columns: 1fr; } }
         @media (max-width: 576px) {
             .greeting-strip { flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
             .hero-row { padding: 0 14px 14px; }
@@ -116,10 +116,10 @@
                         <div class="search-body">
                             <div><p class="field-label">Continent</p><select class="gbr-select"><option>Africa</option><option>Europe</option><option>Asia</option><option>Americas</option><option>Oceania</option></select></div>
                             <div><p class="field-label">Country</p><select class="gbr-select"><option>South Africa</option><option>Kenya</option><option>Nigeria</option><option>Egypt</option></select></div>
-                            <button class="btn-search" type="button">Search</button>
                             <div><p class="field-label">Location</p><select class="gbr-select"><option>Cape Town</option><option>Johannesburg</option><option>Durban</option></select></div>
                             <div><p class="field-label">Field of Expertise</p><select class="gbr-select"><option>Economics</option><option>Politics</option><option>Law</option></select></div>
                             <p class="results-count m-0">We found <strong>28 Results</strong><br/>for Expert</p>
+                            <button class="btn-search" type="button">Search</button>
                         </div>
                     </div>
                 </div>
