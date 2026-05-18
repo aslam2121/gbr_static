@@ -164,7 +164,7 @@
             background: #f3f4f5;
             padding: 18px 22px 22px;
             display: grid;
-            grid-template-columns: 1fr 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 14px 30px;
             align-items: end;
         }
@@ -195,10 +195,10 @@
             border-radius: 3px;
             min-width: 140px;
             cursor: pointer;
+            align-self: end;
         }
         .btn-search:hover { background: var(--gbr-secondary-dark); color: #fff; }
         .results-count {
-            grid-column: 3;
             color: var(--gbr-secondary);
             font-size: 14px;
             text-align: center;
@@ -440,14 +440,20 @@
         }
         @media (max-width: 992px) {
             .search-body { grid-template-columns: 1fr 1fr; }
-            .results-count { grid-column: auto; }
             .main-section { grid-template-columns: 1fr; }
             .hero-row { padding: 0 16px 16px; }
         }
         @media (max-width: 576px) {
-            .search-header { flex-wrap: wrap; gap: 12px; }
-            .search-body { grid-template-columns: 1fr; }
-            .greeting-strip { padding: 12px 16px; }
+            .greeting-strip { flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
+            .hero-row { padding: 0 14px 14px; }
+            .search-header { flex-wrap: wrap; gap: 10px; padding: 10px 14px; font-size: 13px; }
+            .search-body { grid-template-columns: 1fr; padding: 14px; gap: 12px; }
+            .main-section { padding: 16px 14px; gap: 18px; }
+            .field-grid { grid-template-columns: max-content 12px 1fr; }
+            .revenue-row { grid-template-columns: max-content 12px 1fr; }
+            .field-inline { grid-template-columns: max-content 12px 1fr; }
+            .get-in-touch { flex-wrap: wrap; gap: 12px; }
+            .contact-id { font-size: 13px; }
         }
     </style>
 </head>
@@ -518,7 +524,6 @@
                                     <option>Egypt</option>
                                 </select>
                             </div>
-                            <button class="btn-search" type="button">Search</button>
                             <div>
                                 <p class="field-label">Location</p>
                                 <select class="gbr-select">
@@ -537,6 +542,7 @@
                                 </select>
                             </div>
                             <p class="results-count m-0">We found <strong>82 Results</strong><br/>for Company</p>
+                            <button class="btn-search" type="button">Search</button>
                         </div>
                     </div>
                 </div>
