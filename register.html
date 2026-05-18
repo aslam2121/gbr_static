@@ -119,8 +119,26 @@
         .chat-input button { background: var(--gbr-secondary); color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .chat-input button:hover { background: var(--gbr-secondary-dark); }
         @media (max-width: 1200px) { .reg-main { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px 40px; } .form-grid { grid-template-columns: 180px 1fr; } }
-        @media (max-width: 992px) { .reg-main { grid-template-columns: 1fr; } .pin-block { min-height: 200px; } .welcome-strip { flex-wrap: wrap; } .login-wrap { margin-left: 0; } }
-        @media (max-width: 576px) { .login-form { flex-wrap: wrap; } .input-pair { grid-template-columns: 1fr; } }
+        @media (max-width: 992px) { .reg-main { grid-template-columns: 1fr; } .pin-block { display: none; } .welcome-strip { flex-wrap: wrap; } .login-wrap { margin-left: 0; } }
+        @media (max-width: 576px) {
+            .welcome-strip { padding: 10px 14px; gap: 10px; }
+            .login-form { flex-wrap: wrap; gap: 6px; }
+            .login-input { width: 100%; }
+            .hero-row { padding: 0 14px 14px; }
+            .reg-main { padding: 16px 14px 30px; gap: 16px; }
+            .role-row { gap: 18px; flex-wrap: wrap; }
+            .region-row { gap: 12px; }
+            .reg-head { padding-right: 0; }
+            .upload-card { position: static; width: 100%; height: auto; margin-bottom: 10px; }
+            .form-grid { grid-template-columns: 1fr; row-gap: 6px; }
+            .form-grid .lbl { padding-top: 4px; font-weight: 600; }
+            .twin { grid-template-columns: 1fr; gap: 8px; }
+            .triple { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .fy-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .fy-row .country-label { display: none; }
+            .membership-row { gap: 14px; flex-wrap: wrap; }
+            .input-pair { grid-template-columns: 1fr; }
+        }
         .role-form { display: none; }
         .role-form.active { display: contents; }
     </style>
