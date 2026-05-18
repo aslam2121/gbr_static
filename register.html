@@ -221,16 +221,14 @@
                         <span class="lbl">Location of Headquarter/s</span><input class="gbr-input" type="text" placeholder='Use "comma" to separate' />
                         <span class="lbl">Location of Branch/Branches</span><input class="gbr-input" type="text" placeholder='Use "comma" to separate' />
                         <span class="lbl">Type of Investor</span>
-                        <div class="input-pair">
-                            <input class="gbr-input" type="text" />
-                            <div class="multi-popup">
-                                <label><span class="box"><i class="bi bi-check2"></i></span>Private equity firms</label>
-                                <label><span class="box"><i class="bi bi-check2"></i></span>Venture capital firms</label>
-                                <label><span class="box"><i class="bi bi-check2"></i></span>Private investors</label>
-                                <label><span class="box"><i class="bi bi-check2"></i></span>Angel investors</label>
-                                <label><span class="box"><i class="bi bi-check2"></i></span>Business lenders</label>
-                            </div>
-                        </div>
+                        <select class="gbr-select">
+                            <option value="">-- Select --</option>
+                            <option>Private equity firms</option>
+                            <option>Venture capital firms</option>
+                            <option>Private investors</option>
+                            <option>Angel investors</option>
+                            <option>Business lenders</option>
+                        </select>
                         <span class="lbl">Investment Policies (if any)</span><textarea class="gbr-textarea" rows="5"></textarea>
                         <span class="lbl"></span><div><div class="upload-row"><span class="upload-pill">Upload</span><button type="button" class="upload-btn">...</button></div><p class="upload-help">Policies can be uploaded. File must be .pdf or .doc, less than 1MB</p></div>
                         <span class="lbl">Eligibility criteria</span><textarea class="gbr-textarea" rows="3" placeholder="Short description about the basic requirements of the organization in which the investor wants to invest"></textarea>
