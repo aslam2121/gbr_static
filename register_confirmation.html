@@ -96,7 +96,16 @@
         .chat-input button:hover { background: var(--gbr-secondary-dark); }
 
         @media (max-width: 1200px) { .reg-main { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px 40px; } }
-        @media (max-width: 992px) { .reg-main { grid-template-columns: 1fr; } .pin-block { min-height: 200px; } }
+        @media (max-width: 992px) { .reg-main { grid-template-columns: 1fr; } .pin-block { display: none; } }
+        @media (max-width: 576px) {
+            .welcome-strip { flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
+            .login-wrap { margin-left: 0; }
+            .login-form { flex-wrap: wrap; gap: 6px; }
+            .login-input { width: 100%; }
+            .hero-row { padding: 0 14px 14px; }
+            .reg-main { padding: 16px 14px 30px; gap: 16px; }
+            .confirmation { min-height: 300px; padding: 30px 14px; }
+        }
     </style>
 </head>
 <body>
