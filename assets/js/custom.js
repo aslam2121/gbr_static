@@ -7,19 +7,14 @@ var GBR_NAVBAR = `
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav text-uppercase mb-2 mb-lg-0">
+            <ul class="navbar-nav text-uppercase mb-2 mb-lg-0 ms-auto">
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="index.html"><i class="fs-5 bi bi-house-door"></i> Home</a></li>
-                <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="about.html"><i class="fs-5 bi bi-info-circle"></i> About</a></li>
-                <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="how_gbr_works.html"><i class="fs-5 bi bi-layers"></i> How GBR Works</a></li>
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="company.html"><i class="fs-5 bi bi-building"></i> Company</a></li>
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="investor.html"><i class="fs-5 bi bi-journal-text"></i> Investor</a></li>
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="Expert.html"><i class="fs-5 bi bi-person-check"></i> Expert</a></li>
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="register.html"><i class="fs-5 bi bi-person-plus"></i> New Member</a></li>
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="messaging.html"><i class="fs-5 bi bi-chat-dots"></i> Messaging</a></li>
                 <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="videochat.html"><i class="fs-5 bi bi-camera-video"></i> Video Chat</a></li>
-                <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="contactus.html"><i class="fs-5 bi bi-envelope"></i> Contact Us</a></li>
-                <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="policies.html"><i class="fs-5 bi bi-shield-check"></i> Policies</a></li>
-                <li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-white" href="faq.html"><i class="fs-5 bi bi-question-circle"></i> FAQ</a></li>
             </ul>
         </div>
     </div>
