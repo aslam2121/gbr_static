@@ -3,3 +3,10 @@ _template.html
 register.html.bak
 assets/includes/
 .claude/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
