@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GBR | New Member Registration</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Poppins.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/bootstrap_theme/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/blocks.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        :root {
+            --gbr-primary: #043443; --gbr-primary-700: #032a36;
+            --gbr-secondary: #0083ae; --gbr-secondary-dark: #046c8e;
+            --gbr-light-gray: #e6e7e8;
+            --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+            --shadow-card: 0 .125rem .25rem rgba(0,0,0,.06);
+        }
+        body { font-family: var(--font-sans); color: #212529; background: #fff; margin: 0; }
+        .welcome-strip { background: var(--gbr-light-gray); padding: 14px 26px 16px; display: flex; align-items: flex-start; gap: 14px; }
+        .welcome-text { font-weight: 600; font-size: 18px; margin: 6px 0 0; color: var(--gbr-primary); }
+        .login-wrap { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+        .login-form { display: flex; align-items: flex-end; gap: 8px; }
+        .login-form .field { display: flex; flex-direction: column; }
+        .login-form .field-label { font-size: 12px; color: var(--gbr-secondary); margin: 0 0 2px; font-weight: 500; }
+        .login-input { border: 1px solid #b6bcc0; padding: 5px 8px; font-size: 13px; width: 140px; background: #fff; font-family: inherit; }
+        .btn-signin { background: var(--gbr-secondary); color: #fff; border: 0; padding: 6px 16px; font-size: 14px; cursor: pointer; }
+        .btn-signin:hover { background: var(--gbr-secondary-dark); }
+        .forgot-link { font-size: 12px; color: var(--gbr-secondary); text-decoration: none; }
+        .forgot-link:hover { text-decoration: underline; }
+        .hero-row { background: var(--gbr-light-gray); padding: 0 26px 22px; }
+        .hero-card { background: #fff; box-shadow: var(--shadow-card); padding: 22px; height: 200px; display: flex; flex-direction: column; justify-content: center; }
+        .hero-card-1 { align-items: center; text-align: center; }
+        .hero-card-1 .tagline { font-size: 17px; font-weight: 500; margin: 0 0 10px; color: var(--gbr-primary); }
+        .hero-card-1 img { max-width: 170px; height: auto; }
+        .hero-card h3 { font-size: 17px; font-weight: 600; color: var(--gbr-primary); margin: 0 0 6px; }
+        .hero-card p { font-size: 12.5px; line-height: 1.45; color: #212529; margin: 0; }
+        .hero-card-3 { text-align: center; align-items: center; }
+        .hero-card-3 h3 { color: var(--gbr-secondary); font-size: 22px; font-weight: 600; margin: 0 0 2px; }
+        .hero-card-3 .sub { font-size: 13px; color: #212529; margin: 0 0 8px; }
+        .hero-card-3 .blurb { font-size: 12px; line-height: 1.4; margin: 0 0 10px; }
+        .btn-join { background: var(--gbr-secondary); color: #fff; border: 0; padding: 8px 22px; font-size: 15px; font-weight: 500; cursor: pointer; }
+        .btn-join:hover { background: var(--gbr-secondary-dark); color: #fff; }
+        .reg-main { padding: 30px 26px 50px; display: grid; grid-template-columns: 320px 1fr 320px; gap: 24px; background: #fff; }
+        .pin-block { background: #ebeded; min-height: 750px; display: flex; align-items: center; justify-content: center; }
+        .pin-block svg { width: 170px; height: 170px; opacity: 0.55; }
+        .reg-title { color: var(--gbr-secondary); font-size: 17px; font-weight: 600; margin: 0; }
+        .reg-sub { color: #212529; font-size: 12.5px; margin: 0 0 14px; }
+        .role-row { display: flex; align-items: center; gap: 50px; margin: 8px 0 4px; }
+        .role-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--gbr-secondary); font-size: 15px; font-weight: 500; }
+        .role-toggle .box { width: 18px; height: 18px; background: #fff; border: 1px solid #b0b5b9; display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); }
+        .role-toggle .box i { font-size: 14px; visibility: hidden; }
+        .role-toggle.active .box i { visibility: visible; }
+        .choose-line { font-size: 11px; color: #495057; margin: 6px 0 14px; }
+        .region-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+        .region-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--gbr-secondary); font-size: 13.5px; font-weight: 500; }
+        .region-toggle .box { width: 16px; height: 16px; background: #fff; border: 1px solid #b0b5b9; display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); }
+        .region-toggle .box i { font-size: 12px; visibility: hidden; }
+        .region-toggle.active .box i { visibility: visible; }
+        .upload-card { position: absolute; right: 0; top: 8px; width: 92px; height: 92px; background: var(--gbr-light-gray); font-size: 10.5px; line-height: 1.25; color: #212529; padding: 8px 6px; text-align: center; cursor: pointer; }
+        .upload-card .px { font-weight: 600; }
+        .reg-head { position: relative; padding-right: 110px; }
+        .reg-divider { border: 0; border-top: 1.5px solid var(--gbr-secondary); margin: 14px 0 20px; }
+        .form-grid { display: grid; grid-template-columns: 220px 1fr; row-gap: 14px; column-gap: 14px; align-items: start; font-size: 14px; }
+        .form-grid .lbl { color: var(--gbr-secondary); font-weight: 500; padding-top: 8px; line-height: 1.3; }
+        .gbr-input, .gbr-textarea, .gbr-select { width: 100%; border: 1px solid #b6bcc0; background: #fff; padding: 7px 10px; font-size: 13px; color: #212529; font-family: inherit; }
+        .gbr-input::placeholder, .gbr-textarea::placeholder { color: #c4c8cb; font-style: italic; }
+        .gbr-input:focus, .gbr-textarea:focus, .gbr-select:focus { outline: none; border-color: var(--gbr-secondary); }
+        .gbr-textarea { resize: vertical; min-height: 90px; }
+        .gbr-select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%3E%3Cpolygon%20points%3D%220%2C0%2010%2C0%205%2C6%22%20fill%3D%22%23495057%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; }
+        .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .triple { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+        .fy-row { display: grid; grid-template-columns: 1fr 90px 1fr; gap: 14px; align-items: center; }
+        .fy-row .country-label { color: var(--gbr-secondary); font-weight: 500; font-size: 14px; }
+        .input-pair { display: grid; grid-template-columns: 1fr 220px; gap: 14px; align-items: start; }
+        .multi-popup { background: #f5f6f6; border: 1px solid #d0d3d6; padding: 6px 12px 8px; font-size: 13px; display: flex; flex-direction: column; gap: 2px; }
+        .multi-popup label { display: flex; align-items: center; gap: 8px; color: #212529; cursor: pointer; padding: 2px 0; }
+        .multi-popup label .box { width: 13px; height: 13px; border: 1px solid #8a9094; background: #fff; display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); }
+        .multi-popup label .box i { font-size: 9px; visibility: hidden; }
+        .multi-popup label.active .box i { visibility: visible; }
+        .upload-row { display: flex; align-items: center; gap: 6px; }
+        .upload-pill { flex: 0 0 130px; border: 1px solid #b6bcc0; background: #fff; padding: 7px 10px; font-size: 13px; color: #c4c8cb; font-style: italic; }
+        .upload-btn { width: 36px; height: 34px; border: 1px solid #b6bcc0; background: #fff; display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); font-weight: 600; cursor: pointer; }
+        .upload-help { font-size: 11px; color: #6c757d; margin: 4px 0 0; }
+        .membership-row { display: flex; align-items: center; gap: 22px; margin-top: 6px; }
+        .membership-row .pick { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #212529; font-size: 14px; }
+        .membership-row .pick .box { width: 16px; height: 16px; background: #fff; border: 1px solid #b0b5b9; display: inline-flex; align-items: center; justify-content: center; color: var(--gbr-secondary); }
+        .membership-row .pick .box i { font-size: 12px; visibility: hidden; }
+        .membership-row .pick.active .box i { visibility: visible; }
+        .renewable { font-size: 12px; color: #6c757d; margin: 2px 0 0; }
+        .post-reg-note { font-size: 12px; color: var(--gbr-secondary); margin: 18px 0 0; line-height: 1.45; }
+        .submit-row { text-align: center; margin: 32px 0 0; }
+        .btn-submit { background: var(--gbr-secondary); color: #fff; border: 0; padding: 9px 40px; font-size: 16px; font-weight: 500; cursor: pointer; }
+        .btn-submit:hover { background: var(--gbr-secondary-dark); color: #fff; }
+        .right-rail { display: flex; flex-direction: column; gap: 14px; }
+        .promo-photo { width: 100%; aspect-ratio: 4/3.6; background: #d8dde0; position: relative; overflow: hidden; border: 1px solid #e3e6e8; }
+        .promo-photo .photo-bg { position: absolute; inset: 0; background-position: 80% center; background-size: cover; }
+        .promo-photo .photo-fade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(245,247,248,0.96) 0%, rgba(245,247,248,0.88) 38%, rgba(245,247,248,0) 62%); }
+        .promo-photo .logo-overlay { position: absolute; top: 14px; left: 14px; max-width: 110px; z-index: 2; }
+        .promo-photo .photo-text { position: absolute; top: 78px; left: 14px; color: var(--gbr-primary); font-size: 22px; font-weight: 600; line-height: 1.15; max-width: 55%; margin: 0; z-index: 2; }
+        .chat-card { background: #fff; box-shadow: var(--shadow-card); border: 1px solid #e3e6e8; }
+        .chat-head { background: var(--gbr-secondary); color: #fff; padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+        .chat-head .dot { width: 9px; height: 9px; border-radius: 50%; background: #59d27d; box-shadow: 0 0 0 2px rgba(255,255,255,.4); }
+        .chat-head .who { flex: 1; font-weight: 500; }
+        .chat-head .actions { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        .chat-body { padding: 14px 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+        .bubble { max-width: 82%; padding: 9px 12px; font-size: 13.5px; line-height: 1.45; border-radius: 0; }
+        .bubble-them { background: var(--gbr-secondary); color: #fff; align-self: flex-start; }
+        .bubble-me { background: #fff; color: #212529; align-self: flex-end; border: 1px solid #d6dadd; text-align: right; }
+        .chat-input { background: #f7f7f7; display: flex; align-items: stretch; border-top: 1px solid #e3e6e8; }
+        .chat-input input { flex: 1; border: 0; background: transparent; padding: 11px 12px; font-size: 13px; color: #495057; outline: none; font-family: inherit; }
+        .chat-input button { background: var(--gbr-secondary); color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .chat-input button:hover { background: var(--gbr-secondary-dark); }
+        @media (max-width: 1200px) { .reg-main { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px 40px; } .form-grid { grid-template-columns: 180px 1fr; } }
+        @media (max-width: 992px) { .reg-main { grid-template-columns: 1fr; } .pin-block { display: none; } .welcome-strip { flex-wrap: wrap; } .login-wrap { margin-left: 0; } }
+        @media (max-width: 576px) {
+            .welcome-strip { padding: 10px 14px; gap: 10px; }
+            .login-form { flex-wrap: wrap; gap: 6px; }
+            .login-input { width: 100%; }
+            .hero-row { padding: 0 14px 14px; }
+            .reg-main { padding: 16px 14px 30px; gap: 16px; }
+            .role-row { gap: 18px; flex-wrap: wrap; }
+            .region-row { gap: 12px; }
+            .reg-head { padding-right: 0; }
+            .upload-card { position: static; width: 100%; height: auto; margin-bottom: 10px; }
+            .form-grid { grid-template-columns: 1fr; row-gap: 6px; }
+            .form-grid .lbl { padding-top: 4px; font-weight: 600; }
+            .twin { grid-template-columns: 1fr; gap: 8px; }
+            .triple { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .fy-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .fy-row .country-label { display: none; }
+            .membership-row { gap: 14px; flex-wrap: wrap; }
+            .input-pair { grid-template-columns: 1fr; }
+        }
+        .role-form { display: none; }
+        .role-form.active { display: contents; }
+    </style>
+</head>
+<body>
+    <header><div id="navbar-placeholder"></div></header>
+    <main>
+        <div class="welcome-strip">
+            <p class="welcome-text">Welcome to GBR!</p>
+            <div class="login-wrap">
+                <form class="login-form" onsubmit="event.preventDefault()">
+                    <div class="field"><label class="field-label">Member Login</label></div>
+                    <input class="login-input" type="text" placeholder="Username" />
+                    <input class="login-input" type="password" placeholder="Password" />
+                    <button class="btn-signin" type="submit">Sign in</button>
+                </form>
+                <a class="forgot-link" href="#">Forgot your password?</a>
+            </div>
+        </div>
+        <div class="hero-row">
+            <div class="row g-3">
+                <div class="col-lg-4"><div class="hero-card hero-card-1"><p class="tagline">Your business highway to opportunities</p><img src="assets/img/gbr_logo_blue.png" alt="GBR" /></div></div>
+                <div class="col-lg-4"><div class="hero-card"><h3>Take your business meetings to next level.</h3><p>You can find new investors/companies. This is a dummy text and needs to replace with original which is finalised according to the subject. You can find new investors/companies, this is a dummy text and needs to replace with original which is finalised according to the subject.</p></div></div>
+                <div class="col-lg-4"><div class="hero-card hero-card-3"><h3>Join now!!</h3><p class="sub">to take the advantageous of networking</p><p class="blurb">Please do register to open the window of opportunities to find New investors/clients and companies. Let your business fly!!</p><button class="btn-join" type="button">Yes! I want to join now</button></div></div>
+            </div>
+        </div>
+        <section class="reg-main">
+            <aside class="pin-block">
+                <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M100 10 C 55 10, 25 45, 25 90 C 25 145, 100 270, 100 270 C 100 270, 175 145, 175 90 C 175 45, 145 10, 100 10 Z M100 65 C 115 65, 130 80, 130 95 C 130 110, 115 125, 100 125 C 85 125, 70 110, 70 95 C 70 80, 85 65, 100 65 Z" fill="none" stroke="#b8bdc1" stroke-width="3"/>
+                </svg>
+            </aside>
+            <article>
+                <div class="reg-head">
+                    <p class="reg-title">New member registration</p>
+                    <p class="reg-sub">Please do furnish the details as mentioned below</p>
+                    <div class="upload-card">Click here<br/>to upload<br/>the profile<br/>photograph<br/><span class="px">90x90</span> pixels</div>
+                    <div class="role-row" id="roleRow">
+                        <label class="role-toggle" data-role="company">Company <span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="role-toggle" data-role="investor">Investor <span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="role-toggle" data-role="expert">Expert <span class="box"><i class="bi bi-check2"></i></span></label>
+                    </div>
+                    <p class="choose-line" id="roleHelp">Choose the appropriate membership</p>
+                    <div class="region-row" id="regionRow">
+                        <label class="region-toggle" data-region="africa"><span>Africa</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="region-toggle" data-region="europe"><span>Europe</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="region-toggle" data-region="asia"><span>Asia</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="region-toggle" data-region="namerica"><span>N.America</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="region-toggle" data-region="samerica"><span>S.America</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        <label class="region-toggle" data-region="australia"><span>Australia</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                    </div>
+                    <p class="choose-line">Choose the appropriate membership</p>
+                </div>
+                <hr class="reg-divider" />
+                <!-- Company form -->
+                <form class="role-form active" data-form="company" onsubmit="event.preventDefault()">
+                    <div class="form-grid">
+                        <span class="lbl">Name of the company</span><input class="gbr-input" type="text" placeholder="Type here" />
+                        <span class="lbl">Name of the Person</span><div class="twin"><input class="gbr-input" type="text" placeholder="Name" /><input class="gbr-input" type="text" placeholder="Surname" /></div>
+                        <span class="lbl">Foundation Year</span><div class="fy-row"><input class="gbr-input" type="text" /><span class="country-label">Country</span><input class="gbr-input" type="text" /></div>
+                        <span class="lbl">Location of Headquarters</span><input class="gbr-input" type="text" />
+                        <span class="lbl">Location of Branch/Branches</span><select class="gbr-select"><option></option><option>South Africa</option><option>Peru</option><option>Kenya</option></select>
+                        <span class="lbl">Areas of Specification</span>
+                        <select class="gbr-select">
+                            <option value="">-- Select --</option>
+                            <option>Health</option>
+                            <option>Financial services</option>
+                            <option>IT</option>
+                            <option>Consumer products and services</option>
+                            <option>Logistics and transportation</option>
+                            <option>Business products and services</option>
+                            <option>Construction and real estate</option>
+                            <option>Trading</option>
+                            <option>Manufacturing</option>
+                            <option>Advertising and marketing</option>
+                            <option>Agriculture</option>
+                        </select>
+                        <span class="lbl">Annual revenue data or Turn over data</span><div class="upload-row"><span class="upload-pill">upload</span><button type="button" class="upload-btn">...</button></div>
+                        <span class="lbl">Requirements for partnership</span><textarea class="gbr-textarea" rows="4"></textarea>
+                        <span class="lbl">Existing partners, if any</span><input class="gbr-input" type="text" />
+                        <span class="lbl">Personal/business email</span><input class="gbr-input" type="email" placeholder="Your personal email will be used as your login username" />
+                        <span class="lbl">Telephone/Mobile</span><input class="gbr-input" type="tel" />
+                        <span class="lbl">Short description about the company</span><textarea class="gbr-textarea" rows="5"></textarea>
+                        <span class="lbl">Membership duration</span>
+                        <div class="membership-row" data-membership>
+                            <label class="pick"><span>1 Year</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                            <label class="pick"><span>2 Year</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                            <label class="pick"><span>3 Year</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        </div>
+                    </div>
+                    <div class="submit-row"><button class="btn-submit" type="submit">Next</button></div>
+                </form>
+                <!-- Investor form -->
+                <form class="role-form" data-form="investor" onsubmit="event.preventDefault()">
+                    <div class="form-grid">
+                        <span class="lbl">Name of the Person</span><div class="twin"><input class="gbr-input" type="text" placeholder="Name" /><input class="gbr-input" type="text" placeholder="Surname" /></div>
+                        <span class="lbl">Foundation Year</span><div class="fy-row"><input class="gbr-input" type="text" /><span class="country-label">Country</span><input class="gbr-input" type="text" /></div>
+                        <span class="lbl">Location of Headquarter/s</span><input class="gbr-input" type="text" placeholder='Use "comma" to separate' />
+                        <span class="lbl">Location of Branch/Branches</span><input class="gbr-input" type="text" placeholder='Use "comma" to separate' />
+                        <span class="lbl">Type of Investor</span>
+                        <select class="gbr-select">
+                            <option value="">-- Select --</option>
+                            <option>Private equity firms</option>
+                            <option>Venture capital firms</option>
+                            <option>Private investors</option>
+                            <option>Angel investors</option>
+                            <option>Business lenders</option>
+                        </select>
+                        <span class="lbl">Investment Policies (if any)</span><textarea class="gbr-textarea" rows="5"></textarea>
+                        <span class="lbl"></span><div><div class="upload-row"><span class="upload-pill">Upload</span><button type="button" class="upload-btn">...</button></div><p class="upload-help">Policies can be uploaded. File must be .pdf or .doc, less than 1MB</p></div>
+                        <span class="lbl">Eligibility criteria</span><textarea class="gbr-textarea" rows="3" placeholder="Short description about the basic requirements of the organization in which the investor wants to invest"></textarea>
+                        <span class="lbl">Personal/Business Email</span><input class="gbr-input" type="email" placeholder="Your email will be used as your Login username" />
+                        <span class="lbl">Telephone/Mobile</span><input class="gbr-input" type="tel" />
+                        <span class="lbl">Short description about the company</span><textarea class="gbr-textarea" rows="5"></textarea>
+                        <span class="lbl">Membership duration</span>
+                        <div class="membership-row" data-membership>
+                            <label class="pick"><span>1 Year</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                            <label class="pick"><span>2 Year</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                            <label class="pick"><span>3 Year</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        </div>
+                    </div>
+                    <div class="submit-row"><button class="btn-submit" type="submit">Next</button></div>
+                </form>
+                <!-- Expert form -->
+                <form class="role-form" data-form="expert" onsubmit="event.preventDefault()">
+                    <div class="form-grid">
+                        <span class="lbl">Name of the Person</span><div class="twin"><input class="gbr-input" type="text" placeholder="Name" /><input class="gbr-input" type="text" placeholder="Surname" /></div>
+                        <span class="lbl">Date of Birth/Country</span><div class="triple"><input class="gbr-input" type="text" placeholder="Year" /><input class="gbr-input" type="text" placeholder="Month" /><input class="gbr-input" type="text" placeholder="Date" /><input class="gbr-input" type="text" placeholder="Country" /></div>
+                        <span class="lbl">Field of Expertise</span>
+                        <div class="region-row" data-expertise>
+                            <label class="region-toggle active"><span>Economics</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                            <label class="region-toggle"><span>Politics</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                            <label class="region-toggle"><span>Law</span><span class="box"><i class="bi bi-check2"></i></span></label>
+                        </div>
+                        <span class="lbl">Specialisation on selected field</span><input class="gbr-input" type="text" />
+                        <span class="lbl">Years of Experience</span><div style="max-width:130px;"><input class="gbr-input" type="text" placeholder="Years" /></div>
+                        <span class="lbl">Brief description about work experience</span><textarea class="gbr-textarea" rows="5"></textarea>
+                        <span class="lbl">CV/Biography</span><div class="upload-row"><span class="upload-pill" style="width:130px;">Upload CV</span><button type="button" class="upload-btn">...</button></div>
+                        <span class="lbl">Consultation Fee/hour</span><div style="max-width:200px;"><input class="gbr-input" type="text" placeholder="$ 0.00" /></div>
+                        <span class="lbl">Telephone/Mobile</span><input class="gbr-input" type="tel" />
+                        <span class="lbl">Personal/Business Email</span><input class="gbr-input" type="email" placeholder="Your email will be used as your Login username" />
+                        <span class="lbl">Any other details (if any)</span><textarea class="gbr-textarea" rows="4"></textarea>
+                        <span class="lbl">Membership duration</span><div><div style="font-size:15px;font-weight:500;color:var(--gbr-secondary);">1 Year</div><p class="renewable">Renewable after each year</p></div>
+                    </div>
+                    <p class="post-reg-note">*You will be receiving a mail containing "username" and password to access your GBR account within 24 hours after registration</p>
+                    <div class="submit-row"><button class="btn-submit" type="submit">Register</button></div>
+                </form>
+            </article>
+            <aside class="right-rail">
+                <div class="promo-photo">
+                    <div class="photo-bg" style="background-image: url('assets/img/sidebar_image.jpg');"></div>
+                    <div class="photo-fade"></div>
+                    <img src="assets/img/gbr_logo_blue.png" alt="" class="logo-overlay" />
+                    <p class="photo-text">Meet the business personnels virtually</p>
+                </div>
+                <div class="chat-card">
+                    <div class="chat-head"><span class="dot"></span><span class="who">+00290-Rubin</span><span class="actions"><i class="bi bi-chat-dots"></i><i class="bi bi-camera-video"></i><i class="bi bi-paperclip"></i><i class="bi bi-square"></i><i class="bi bi-dash"></i></span></div>
+                    <div class="chat-body">
+                        <div class="bubble bubble-them">Hello<br/>How are you!</div>
+                        <div class="bubble bubble-me">Hello<br/>How are you!</div>
+                        <div class="bubble bubble-them">Regarding the proposed project we need to discuss further to make sure everything as on our plan, when its possible</div>
+                        <div class="bubble bubble-me">According to your company policies we will be able to do that if it works well for us too</div>
+                    </div>
+                    <form class="chat-input" onsubmit="event.preventDefault()"><input type="text" value="Further to our previous discussion we will be able..." /><button type="submit" aria-label="Send"><i class="bi bi-send-fill"></i></button></form>
+                </div>
+            </aside>
+        </section>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        const roleRow = document.getElementById('roleRow');
+        const roleHelp = document.getElementById('roleHelp');
+        const forms = document.querySelectorAll('.role-form');
+        function setRole(role) {
+            roleRow.querySelectorAll('.role-toggle').forEach(t => t.classList.toggle('active', t.dataset.role === role));
+            forms.forEach(f => f.classList.toggle('active', f.dataset.form === role));
+            roleHelp.textContent = role === 'expert' ? 'Membership will be free for Experts' : 'Choose the appropriate membership';
+        }
+        roleRow.addEventListener('click', e => { const t = e.target.closest('.role-toggle'); if (t) setRole(t.dataset.role); });
+        setRole('company');
+        document.querySelectorAll('.region-toggle').forEach(el => el.addEventListener('click', e => { e.preventDefault(); el.classList.toggle('active'); }));
+        document.querySelectorAll('.multi-popup label').forEach(el => el.addEventListener('click', e => { e.preventDefault(); el.classList.toggle('active'); }));
+        document.querySelectorAll('[data-membership] .pick').forEach(p => {
+            p.addEventListener('click', e => { e.preventDefault(); p.parentElement.querySelectorAll('.pick').forEach(x => x.classList.remove('active')); p.classList.add('active'); });
+        });
+        document.querySelector('.region-toggle[data-region="africa"]').classList.add('active');
+    </script>
+</body>
+</html>
