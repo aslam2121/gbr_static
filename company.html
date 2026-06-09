@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Blank Template for Bootstrap</title>
+    <title>GBR | Company</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -19,9 +19,208 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <!--
+    ============================================================
+    BACKEND DEVELOPER — PERMISSION SYSTEM OVERVIEW
+    ============================================================
+
+    HOW IT WORKS:
+    When a paid user logs in, the backend must set window.GBR_USER
+    before this page's closing </body> script runs.
+
+    Inject this object from your server-side template or API:
+
+        window.GBR_USER = {
+            loggedIn: true,
+            paid: true,
+            name: "Acme Corp",          // shown in greeting
+            permissions: [
+                "view_contacts",        // reveals email + phone
+                "view_financials",      // reveals revenue document
+                "view_partnership",     // reveals partnership requirements + partners
+                "send_message"          // reveals Message + Video Chat buttons
+            ]
+        };
+
+    For a non-logged-in or free user, either omit window.GBR_USER
+    entirely or set loggedIn: false — the page will show the
+    public view only.
+
+    PERMISSION KEYS (used as data-permission="..." on HTML elements):
+        view_contacts     — contact email and phone number
+        view_financials   — annual revenue / turnover data
+        view_partnership  — partnership requirements and existing partners
+        send_message      — messaging and video chat action buttons
+
+    Add or remove permission keys from the array to grant or
+    restrict access per user. Sections whose permission key is not
+    in the array will show a locked placeholder instead.
+    ============================================================
+    -->
+
+    <style>
+        :root {
+            --gbr-primary: #043443;
+            --gbr-secondary: #0083ae;
+            --gbr-secondary-dark: #046c8e;
+            --gbr-light-gray: #e6e7e8;
+            --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Login-prompt banner — shown to guests, hidden when logged in */
+        .login-prompt {
+            background: #e7f9fc;
+            border-left: 4px solid var(--gbr-secondary);
+            padding: 14px 20px;
+            margin: 24px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 14px;
+            color: #212529;
+        }
+        .login-prompt i { color: var(--gbr-secondary); font-size: 20px; }
+        .login-prompt a { color: var(--gbr-secondary); font-weight: 600; text-decoration: none; }
+        .login-prompt a:hover { text-decoration: underline; }
+
+        /* Member section — hidden by default, shown when paid user is detected */
+        .gbr-member-section {
+            display: none;
+            background: #f7fafb;
+            padding: 36px 0 48px;
+            border-top: 3px solid var(--gbr-secondary);
+        }
+
+        .member-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gbr-secondary);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin: 0 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .member-card {
+            background: #fff;
+            border: 1px solid #dde2e6;
+            padding: 28px 32px;
+        }
+
+        /* Profile header row inside card */
+        .member-profile-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gbr-light-gray);
+        }
+        .member-avatar {
+            width: 72px;
+            height: 72px;
+            background: var(--gbr-light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 28px;
+            color: var(--gbr-secondary);
+        }
+        .member-name { font-size: 20px; font-weight: 700; color: var(--gbr-primary); margin: 0 0 4px; }
+        .member-meta { font-size: 13px; color: #6c757d; margin: 0; }
+        .member-badge-pill {
+            display: inline-block;
+            background: var(--gbr-secondary);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 12px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Data grid inside card */
+        .member-data-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            row-gap: 12px;
+            column-gap: 16px;
+            font-size: 13.5px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gbr-light-gray);
+        }
+        .member-data-grid .key { color: var(--gbr-secondary); font-weight: 600; padding-top: 1px; }
+        .member-data-grid .val { color: #212529; }
+
+        /* Permission-gated sections */
+        .perm-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gbr-light-gray);
+        }
+        .perm-section:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+        .perm-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9aa0a6;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin: 0 0 10px;
+        }
+
+        /* Locked state — shown when permission is missing */
+        .perm-locked {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f6f6;
+            border: 1px dashed #c8cdd1;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #6c757d;
+        }
+        .perm-locked i { font-size: 16px; color: #b6bcc0; }
+
+        /* Action buttons */
+        .btn-gbr { background: var(--gbr-secondary); color: #fff; border: 0; padding: 9px 24px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-gbr:hover { background: var(--gbr-secondary-dark); color: #fff; }
+        .btn-gbr-outline { background: #fff; color: var(--gbr-secondary); border: 1.5px solid var(--gbr-secondary); padding: 9px 24px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-gbr-outline:hover { background: #f0f8fc; color: var(--gbr-secondary); }
+        .actions-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        /* Paid member greeting strip */
+        .member-greeting {
+            display: none;
+            background: var(--gbr-primary);
+            color: #fff;
+            padding: 10px 0;
+            font-size: 13.5px;
+        }
+        .member-greeting span { font-weight: 600; color: #59d27d; }
+
+        @media (max-width: 768px) {
+            .member-card { padding: 18px 16px; }
+            .member-data-grid { grid-template-columns: 1fr; row-gap: 6px; }
+            .member-data-grid .key { padding-top: 8px; border-top: 1px solid #f0f2f3; }
+            .member-data-grid .key:first-child { border-top: 0; padding-top: 0; }
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- Paid member greeting — hidden by default, shown by JS when GBR_USER.loggedIn === true -->
+    <div class="member-greeting" id="memberGreeting">
+        <div class="container">
+            Welcome back, <span id="greetingName"></span> &mdash; you are viewing full member details.
+        </div>
+    </div>
+
     <header class="bg-light">
         <div id="navbar-placeholder"></div>
         <div class="container">
@@ -71,7 +270,7 @@
                             <p class="fw-bold mb-0">Live chat</p><i class="fas fa-times"></i>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex flex-row justify-content-start mb-4"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width:45px;height:100%;">
+                            <div class="d-flex flex-row justify-content-start mb-4"><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
                                 <div class="bg-primary p-3 ms-3" style="border-radius:15px;background-color:rgba(57, 192, 237,.2);">
                                     <p class="text-light mb-0 small">Hello and thank you for visiting MDBootstrap. Please click the video below.</p>
                                 </div>
@@ -79,16 +278,16 @@
                             <div class="d-flex flex-row justify-content-end mb-4">
                                 <div class="bg-body-tertiary border p-3 me-3" style="border-radius:15px;">
                                     <p class="mb-0 small">Thank you, I really like your product.</p>
-                                </div><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="avatar 1" style="width:45px;height:100%;">
+                                </div><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
                             </div>
-                            <div class="d-flex flex-row justify-content-start mb-4"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width:45px;height:100%;">
+                            <div class="d-flex flex-row justify-content-start mb-4"><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
                                 <div class="ms-3" style="border-radius:15px;">
-                                    <div class="bg-image"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/screenshot1.webp" style="border-radius:15px;" alt="video"><a href="#!">
+                                    <div class="bg-image"><div style="width:100%;height:80px;background:#e6e7e8;border-radius:8px;display:flex;align-items:center;justify-content:center;"><i class="bi bi-play-circle" style="font-size:32px;color:#6c757d;"></i></div><a href="#!">
                                             <div class="mask"></div>
                                         </a></div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row justify-content-start mb-4"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width:45px;height:100%;">
+                            <div class="d-flex flex-row justify-content-start mb-4"><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
                                 <div class="bg-primary p-3 ms-3" style="border-radius:15px;background-color:rgba(57, 192, 237,.2);">
                                     <p class="text-light mb-0 small">...</p>
                                 </div>
@@ -100,9 +299,265 @@
             </div>
         </div>
     </section>
+
+    <!--
+    LOGIN PROMPT — visible to guests only.
+    JS hides this automatically when GBR_USER.loggedIn === true.
+    -->
+    <div class="container">
+        <div class="login-prompt" id="loginPrompt">
+            <i class="bi bi-lock-fill"></i>
+            <div>You are viewing the public page. <a href="register.html">Sign in or register</a> as a paid member to view full company profiles, contact details, and connect directly.
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    MEMBER SECTION
+    Hidden by default via CSS (display:none on .gbr-member-section).
+    The JS block at the bottom of this page reads window.GBR_USER and:
+      1. Shows this section if GBR_USER.loggedIn && GBR_USER.paid
+      2. Shows/hides each .perm-section based on GBR_USER.permissions[]
+      3. Shows .perm-locked fallback for any missing permission
+
+    BACKEND: populate dummy values below with real data from your API/template.
+    ============================================================ -->
+    <section class="gbr-member-section" id="memberSection">
+        <div class="container">
+            <p class="member-section-title"><i class="bi bi-buildings"></i> Company Profile</p>
+            <div class="row g-4">
+
+                <!-- Main profile card -->
+                <div class="col-lg-8">
+                    <div class="member-card">
+
+                        <!-- Profile header — BACKEND: replace dummy values -->
+                        <div class="member-profile-header">
+                            <div class="member-avatar"><i class="bi bi-building"></i></div>
+                            <div>
+                                <p class="member-name">
+                                    Acme Global Ltd
+                                    <!-- BACKEND: output company name here -->
+                                    <span class="member-badge-pill">Paid Member</span>
+                                </p>
+                                <p class="member-meta">
+                                    Area of Specification: <strong>Financial services</strong>
+                                    <!-- BACKEND: output area of specification here -->
+                                </p>
+                                <p class="member-meta">Foundation Year: <strong>2008</strong> &nbsp;&bull;&nbsp; Headquarters: <strong>London, UK</strong>
+                                    <!-- BACKEND: output foundation year and HQ here -->
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Always-visible data — shown to all paid members -->
+                        <div class="perm-section">
+                            <p class="perm-label">Company Details</p>
+                            <div class="member-data-grid">
+                                <span class="key">Branch / Branches</span>
+                                <span class="val">Dubai, Singapore, New York
+                                    <!-- BACKEND: output branch locations here -->
+                                </span>
+
+                                <span class="key">Short Description</span>
+                                <span class="val">Dummy text — replace with actual company description from the database. This is visible to all paid members regardless of permissions.
+                                    <!-- BACKEND: output short description here -->
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- CONTACT INFO — requires "view_contacts" permission -->
+                        <div class="perm-section" data-permission="view_contacts">
+                            <p class="perm-label">Contact Information</p>
+
+                            <!-- Shown when permission is granted -->
+                            <div class="perm-content">
+                                <div class="member-data-grid">
+                                    <span class="key">Email</span>
+                                    <span class="val">contact@acmeglobal.com
+                                        <!-- BACKEND: output email here -->
+                                    </span>
+                                    <span class="key">Telephone / Mobile</span>
+                                    <span class="val">+44 20 1234 5678
+                                        <!-- BACKEND: output phone here -->
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Shown when permission is missing — do not remove -->
+                            <div class="perm-locked" style="display:none;">
+                                <i class="bi bi-lock-fill"></i>
+                                You do not have permission to view contact details. Contact your administrator.
+                            </div>
+                        </div>
+
+                        <!-- FINANCIALS — requires "view_financials" permission -->
+                        <div class="perm-section" data-permission="view_financials">
+                            <p class="perm-label">Financial Data</p>
+
+                            <div class="perm-content">
+                                <div class="member-data-grid">
+                                    <span class="key">Annual Revenue / Turnover</span>
+                                    <span class="val">
+                                        <a href="#" class="btn-gbr-outline" style="font-size:13px; padding:6px 14px;">
+                                            <i class="bi bi-file-earmark-arrow-down"></i> Download Document
+                                            <!-- BACKEND: replace href with actual file URL -->
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="perm-locked" style="display:none;">
+                                <i class="bi bi-lock-fill"></i>
+                                You do not have permission to view financial data. Contact your administrator.
+                            </div>
+                        </div>
+
+                        <!-- PARTNERSHIP INFO — requires "view_partnership" permission -->
+                        <div class="perm-section" data-permission="view_partnership">
+                            <p class="perm-label">Partnership</p>
+
+                            <div class="perm-content">
+                                <div class="member-data-grid">
+                                    <span class="key">Requirements for Partnership</span>
+                                    <span class="val">Dummy text — replace with actual partnership requirements from the database.
+                                        <!-- BACKEND: output partnership requirements here -->
+                                    </span>
+                                    <span class="key">Existing Partners</span>
+                                    <span class="val">Partner A, Partner B, Partner C
+                                        <!-- BACKEND: output existing partners here -->
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="perm-locked" style="display:none;">
+                                <i class="bi bi-lock-fill"></i>
+                                You do not have permission to view partnership details. Contact your administrator.
+                            </div>
+                        </div>
+
+                        <!-- ACTION BUTTONS — requires "send_message" permission -->
+                        <div class="perm-section" data-permission="send_message">
+                            <p class="perm-label">Connect</p>
+
+                            <div class="perm-content">
+                                <div class="actions-row">
+                                    <a href="messaging.html" class="btn-gbr">
+                                        <i class="bi bi-chat-dots"></i> Send Message
+                                        <!-- BACKEND: pass company/user ID as query param e.g. messaging.html?to=123 -->
+                                    </a>
+                                    <a href="videochat.html" class="btn-gbr-outline">
+                                        <i class="bi bi-camera-video"></i> Video Chat
+                                        <!-- BACKEND: pass company/user ID as query param e.g. videochat.html?with=123 -->
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="perm-locked" style="display:none;">
+                                <i class="bi bi-lock-fill"></i>
+                                You do not have permission to send messages. Contact your administrator.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Side info card -->
+                <div class="col-lg-4">
+                    <div class="member-card" style="font-size:13.5px;">
+                        <p class="perm-label" style="margin-bottom:14px;">Membership Info</p>
+                        <div class="member-data-grid" style="margin-bottom:0; border-bottom:0; padding-bottom:0;">
+                            <span class="key">Member Since</span>
+                            <span class="val">January 2024
+                                <!-- BACKEND: output registration date here -->
+                            </span>
+                            <span class="key">Membership</span>
+                            <span class="val">2 Year Plan
+                                <!-- BACKEND: output membership plan here -->
+                            </span>
+                            <span class="key">Status</span>
+                            <span class="val" style="color:#198754; font-weight:600;">Active
+                                <!-- BACKEND: output membership status here -->
+                            </span>
+                            <span class="key">Continent</span>
+                            <span class="val">Europe
+                                <!-- BACKEND: output continent here -->
+                            </span>
+                            <span class="key">Country</span>
+                            <span class="val">United Kingdom
+                                <!-- BACKEND: output country here -->
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <div id="footer-placeholder"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <!--
+    ============================================================
+    BACKEND DEVELOPER — HOW TO INJECT USER DATA
+    ============================================================
+    Before this script runs, output window.GBR_USER from your
+    server-side template. Example (PHP):
+
+        <script>
+            window.GBR_USER = {
+                loggedIn: <?= $user->isLoggedIn() ? 'true' : 'false' ?>,
+                paid:     <?= $user->isPaid() ? 'true' : 'false' ?>,
+                name:     "<?= htmlspecialchars($user->companyName) ?>",
+                permissions: <?= json_encode($user->permissions) ?>
+            };
+        </script>
+
+    Or from a JS API call, set window.GBR_USER before the page
+    renders (e.g. in a blocking <script> in <head> after auth check).
+
+    If window.GBR_USER is not set, the page shows public view only.
+    ============================================================
+    -->
+    <script>
+        (function () {
+            var user = window.GBR_USER || { loggedIn: false, paid: false, permissions: [] };
+
+            // Only show member section to paid, logged-in users
+            if (!user.loggedIn || !user.paid) return;
+
+            // Show greeting strip
+            document.getElementById('memberGreeting').style.display = 'block';
+            document.getElementById('greetingName').textContent = user.name || 'Member';
+
+            // Hide the guest login prompt
+            var prompt = document.getElementById('loginPrompt');
+            if (prompt) prompt.style.display = 'none';
+
+            // Show the member section
+            document.getElementById('memberSection').style.display = 'block';
+
+            // Check each permission-gated section
+            document.querySelectorAll('[data-permission]').forEach(function (section) {
+                var key = section.getAttribute('data-permission');
+                var hasPermission = user.permissions.indexOf(key) !== -1;
+                var content = section.querySelector('.perm-content');
+                var locked  = section.querySelector('.perm-locked');
+
+                if (hasPermission) {
+                    // Permission granted — show content, hide lock
+                    if (content) content.style.display = 'block';
+                    if (locked)  locked.style.display  = 'none';
+                } else {
+                    // Permission missing — hide content, show lock
+                    if (content) content.style.display = 'none';
+                    if (locked)  locked.style.display  = 'flex';
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>
