@@ -90,73 +90,18 @@
         .chat-input button { background: var(--gbr-secondary); color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .chat-input button:hover { background: var(--gbr-secondary-dark); }
 
-        /* Membership status bar */
-        .membership-bar { background: var(--gbr-primary); color: #fff; padding: 7px 26px; display: flex; align-items: center; gap: 24px; font-size: 13px; flex-wrap: wrap; }
-        .membership-bar .mbr-item { display: flex; align-items: center; gap: 7px; }
-        .membership-bar .mbr-label { opacity: .7; }
-        .membership-bar .mbr-value { font-weight: 600; }
-        .membership-bar .mbr-badge { background: #59d27d; color: #043443; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
-        .membership-bar .mbr-warn { background: #f0ad4e; color: #043443; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
-        .mbr-divider { width: 1px; height: 16px; background: rgba(255,255,255,.2); }
-
-        /* Dashboard center panel */
-        .dash-panel { width: 100%; }
-
-        /* Stats row */
-        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
-        .stat-card { background: #fff; border: 1px solid #e3e6e8; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
-        .stat-card .stat-num { font-size: 26px; font-weight: 700; color: var(--gbr-primary); line-height: 1; }
-        .stat-card .stat-label { font-size: 12px; color: #6c757d; }
-        .stat-card .stat-icon { font-size: 20px; color: var(--gbr-secondary); margin-bottom: 4px; }
-
-        /* Recent activity */
-        .dash-section-title { font-size: 13px; font-weight: 700; color: var(--gbr-secondary); text-transform: uppercase; letter-spacing: .5px; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
-        .activity-list { border: 1px solid #e3e6e8; background: #fff; }
-        .activity-item { display: flex; align-items: center; gap: 14px; padding: 11px 16px; border-bottom: 1px solid #f0f2f3; font-size: 13.5px; }
-        .activity-item:last-child { border-bottom: 0; }
-        .activity-icon { width: 34px; height: 34px; border-radius: 50%; background: #e7f9fc; display: flex; align-items: center; justify-content: center; color: var(--gbr-secondary); font-size: 15px; flex-shrink: 0; }
-        .activity-text { flex: 1; }
-        .activity-text .act-name { font-weight: 600; color: var(--gbr-primary); }
-        .activity-text .act-desc { color: #6c757d; font-size: 12.5px; }
-        .activity-time { font-size: 12px; color: #9aa0a6; white-space: nowrap; }
-
-        /* Quick actions */
-        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 22px; }
-        .quick-btn { background: #fff; border: 1.5px solid #dde2e6; padding: 14px 10px; text-align: center; text-decoration: none; color: var(--gbr-primary); font-size: 13px; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: border-color .15s, background .15s; }
-        .quick-btn i { font-size: 22px; color: var(--gbr-secondary); }
-        .quick-btn:hover { border-color: var(--gbr-secondary); background: #f0f8fc; color: var(--gbr-primary); }
-
-        /* Membership summary card (right rail) */
-        .mbr-card { background: #fff; border: 1px solid #e3e6e8; padding: 0; overflow: hidden; }
-        .mbr-card-head { background: var(--gbr-primary); color: #fff; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
-        .mbr-card-avatar { width: 42px; height: 42px; background: rgba(255,255,255,.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-        .mbr-card-name { font-size: 15px; font-weight: 600; margin: 0; }
-        .mbr-card-role { font-size: 12px; opacity: .75; margin: 0; }
-        .mbr-card-body { padding: 14px 16px; font-size: 13px; display: flex; flex-direction: column; gap: 9px; }
-        .mbr-row { display: flex; justify-content: space-between; align-items: center; }
-        .mbr-row .mk { color: #6c757d; }
-        .mbr-row .mv { font-weight: 600; color: var(--gbr-primary); }
-        .mbr-row .mv-green { font-weight: 600; color: #198754; }
-        .mbr-row .mv-warn { font-weight: 600; color: #d97706; }
-        .mbr-divider-h { border: 0; border-top: 1px solid #f0f2f3; margin: 2px 0; }
-        .mbr-card-foot { padding: 10px 16px; border-top: 1px solid #f0f2f3; }
-        .btn-renew { display: block; text-align: center; background: var(--gbr-secondary); color: #fff; font-size: 13px; font-weight: 500; padding: 8px; text-decoration: none; }
-        .btn-renew:hover { background: var(--gbr-secondary-dark); color: #fff; }
-        .btn-edit-profile { display: block; text-align: center; background: #fff; color: var(--gbr-secondary); font-size: 13px; font-weight: 500; padding: 8px; text-decoration: none; border: 1.5px solid var(--gbr-secondary); margin-top: 8px; }
-        .btn-edit-profile:hover { background: #f0f8fc; color: var(--gbr-secondary); }
-
         /* Responsive */
-        @media (max-width: 1200px) { .main-section { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px; } .stats-row { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 992px) { .search-body { grid-template-columns: 1fr 1fr; } .main-section { grid-template-columns: 1fr; } .quick-actions { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 1200px) { .main-section { grid-template-columns: 220px 1fr 300px; gap: 18px; padding: 24px 18px; } }
+        @media (max-width: 992px) { .search-body { grid-template-columns: 1fr 1fr; } .main-section { grid-template-columns: 1fr; } }
         @media (max-width: 576px) {
             .greeting-strip { flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
-            .membership-bar { padding: 8px 14px; gap: 14px; }
             .hero-row { padding: 0 14px 14px; }
             .search-header { flex-wrap: wrap; gap: 10px; padding: 10px 14px; font-size: 13px; }
             .search-body { grid-template-columns: 1fr; padding: 14px; gap: 12px; }
             .main-section { padding: 16px 14px; gap: 18px; }
-            .stats-row { grid-template-columns: repeat(2,1fr); }
-            .quick-actions { grid-template-columns: repeat(2,1fr); }
+            .empty-state { min-height: 320px; }
+            .empty-pin { width: 180px; height: 180px; }
+            .empty-text { font-size: 14px; }
         }
     </style>
 </head>
@@ -169,37 +114,6 @@
             <div class="greeting-avatar"><img src="assets/img/sidebar_image.jpg" alt="User avatar" style="object-position:60% 22%;" /></div>
             <p class="greeting-name">Hello Maxim!</p>
             <div class="ms-auto"><button class="btn-signout" type="button">Sign out</button></div>
-        </div>
-
-        <!--
-            MEMBERSHIP STATUS BAR
-            BACKEND: Replace all values below with real user data from your session/API.
-            Remove the entire <div class="membership-bar"> block if you prefer to show this elsewhere.
-        -->
-        <div class="membership-bar">
-            <div class="mbr-item">
-                <span class="mbr-label">Member:</span>
-                <span class="mbr-value">Maxim (Company)</span>
-                <!-- BACKEND: output user name and role here -->
-            </div>
-            <div class="mbr-divider"></div>
-            <div class="mbr-item">
-                <span class="mbr-label">Plan:</span>
-                <span class="mbr-value">2 Year Membership</span>
-                <!-- BACKEND: output membership plan here -->
-            </div>
-            <div class="mbr-divider"></div>
-            <div class="mbr-item">
-                <span class="mbr-label">Expires:</span>
-                <span class="mbr-value">15 Jan 2027</span>
-                <!-- BACKEND: output expiry date here -->
-            </div>
-            <div class="mbr-divider"></div>
-            <div class="mbr-item">
-                <span class="mbr-badge">Active — 234 days left</span>
-                <!-- BACKEND: show mbr-badge when active, mbr-warn when < 30 days remaining -->
-                <!-- BACKEND: calculate and output days remaining here -->
-            </div>
         </div>
 
         <!-- Hero row + search panel -->
@@ -290,189 +204,16 @@
                 </div>
             </aside>
 
-            <!--
-                DASHBOARD CENTER PANEL
-                BACKEND: This panel is shown before a user selects a contact.
-                When a contact is selected from the left list, replace this entire
-                <article> content with that contact's detail view.
-                All numbers below are dummy data — replace with real API values.
-            -->
-            <article class="dash-panel">
-
-                <!--
-                    STATS ROW
-                    BACKEND: Replace each .stat-num value with real counts from your API.
-                    Show/hide individual cards based on user role if needed.
-                -->
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <i class="bi bi-eye stat-icon"></i>
-                        <span class="stat-num">47</span>
-                        <!-- BACKEND: output profile view count this month -->
-                        <span class="stat-label">Profile Views This Month</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="bi bi-people stat-icon"></i>
-                        <span class="stat-num">21</span>
-                        <!-- BACKEND: output total active contacts count -->
-                        <span class="stat-label">Active Contacts</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="bi bi-chat-dots stat-icon"></i>
-                        <span class="stat-num">3</span>
-                        <!-- BACKEND: output unread messages count -->
-                        <span class="stat-label">Unread Messages</span>
-                    </div>
-                    <div class="stat-card">
-                        <i class="bi bi-calendar-check stat-icon"></i>
-                        <span class="stat-num">234</span>
-                        <!-- BACKEND: output days remaining in membership -->
-                        <span class="stat-label">Membership Days Left</span>
-                    </div>
-                </div>
-
-                <!--
-                    RECENT ACTIVITY
-                    BACKEND: Loop through recent activity records from your database.
-                    Each .activity-item is one record. Remove dummy items and replace
-                    with a server-side loop. Show "No recent activity" if list is empty.
-                -->
-                <p class="dash-section-title"><i class="bi bi-clock-history"></i> Recent Activity</p>
-                <div class="activity-list">
-
-                    <!-- BACKEND: repeat this block for each activity record -->
-                    <div class="activity-item">
-                        <div class="activity-icon"><i class="bi bi-chat-dots"></i></div>
-                        <div class="activity-text">
-                            <span class="act-name">+00290-Rubin</span>
-                            <span class="act-desc"> — sent you a message</span>
-                        </div>
-                        <span class="activity-time">2 hrs ago</span>
-                        <!-- BACKEND: output contact name, activity type, and timestamp -->
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon"><i class="bi bi-eye"></i></div>
-                        <div class="activity-text">
-                            <span class="act-name">+00298-Alexander</span>
-                            <span class="act-desc"> — viewed your profile</span>
-                        </div>
-                        <span class="activity-time">Yesterday</span>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon"><i class="bi bi-person-plus"></i></div>
-                        <div class="activity-text">
-                            <span class="act-name">+00223-Ahmed</span>
-                            <span class="act-desc"> — requested contact</span>
-                        </div>
-                        <span class="activity-time">2 days ago</span>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon"><i class="bi bi-camera-video"></i></div>
-                        <div class="activity-text">
-                            <span class="act-name">+00298-Konul</span>
-                            <span class="act-desc"> — video chat with you</span>
-                        </div>
-                        <span class="activity-time">3 days ago</span>
-                    </div>
-
-                    <div class="activity-item">
-                        <div class="activity-icon"><i class="bi bi-chat-dots"></i></div>
-                        <div class="activity-text">
-                            <span class="act-name">+00270-Markose Steph</span>
-                            <span class="act-desc"> — sent you a message</span>
-                        </div>
-                        <span class="activity-time">4 days ago</span>
-                    </div>
-                    <!-- BACKEND: end loop -->
-
-                </div>
-
-                <!--
-                    QUICK ACTIONS
-                    BACKEND: Update href values to match your routing.
-                    Show/hide buttons based on user role permissions if needed.
-                -->
-                <div class="quick-actions">
-                    <a href="member_home.html" class="quick-btn">
-                        <i class="bi bi-search"></i> Search Members
-                    </a>
-                    <a href="messaging.html" class="quick-btn">
-                        <i class="bi bi-chat-dots"></i> Messages
-                    </a>
-                    <a href="videochat.html" class="quick-btn">
-                        <i class="bi bi-camera-video"></i> Video Chat
-                    </a>
-                    <a href="#" class="quick-btn">
-                        <i class="bi bi-person-gear"></i> My Profile
-                        <!-- BACKEND: link to profile_company.html / profile_investor.html / profile_expert.html based on role -->
-                    </a>
-                </div>
-
+            <!-- Center: empty state (no contact selected yet) -->
+            <article class="empty-state">
+                <svg class="empty-pin" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M100 10 C 55 10, 25 45, 25 90 C 25 145, 100 270, 100 270 C 100 270, 175 145, 175 90 C 175 45, 145 10, 100 10 Z M100 65 C 115 65, 130 80, 130 95 C 130 110, 115 125, 100 125 C 85 125, 70 110, 70 95 C 70 80, 85 65, 100 65 Z" fill="none" stroke="#c4c8cb" stroke-width="3"/>
+                </svg>
+                <p class="empty-text">Search above to find new contacts</p>
             </article>
 
-            <!-- Right rail: membership card + profile photo + chat -->
+            <!-- Right rail: profile photo + chat -->
             <aside class="right-rail">
-
-                <!--
-                    MEMBERSHIP SUMMARY CARD
-                    BACKEND: Replace all values with real user session data.
-                    Remove the entire .mbr-card block if shown elsewhere.
-                -->
-                <div class="mbr-card">
-                    <div class="mbr-card-head">
-                        <div class="mbr-card-avatar"><i class="bi bi-building"></i></div>
-                        <!-- BACKEND: use bi-building for Company, bi-graph-up for Investor, bi-person-check for Expert -->
-                        <div>
-                            <p class="mbr-card-name">Maxim</p>
-                            <!-- BACKEND: output user display name here -->
-                            <p class="mbr-card-role">Company Member</p>
-                            <!-- BACKEND: output role (Company / Investor / Expert) here -->
-                        </div>
-                    </div>
-                    <div class="mbr-card-body">
-                        <div class="mbr-row">
-                            <span class="mk">Membership</span>
-                            <span class="mv">2 Year Plan</span>
-                            <!-- BACKEND: output membership plan name -->
-                        </div>
-                        <hr class="mbr-divider-h">
-                        <div class="mbr-row">
-                            <span class="mk">Status</span>
-                            <span class="mv-green">Active</span>
-                            <!-- BACKEND: mv-green = Active, mv-warn = Expiring Soon, mv = Expired -->
-                        </div>
-                        <hr class="mbr-divider-h">
-                        <div class="mbr-row">
-                            <span class="mk">Member Since</span>
-                            <span class="mv">Jan 2025</span>
-                            <!-- BACKEND: output registration date -->
-                        </div>
-                        <hr class="mbr-divider-h">
-                        <div class="mbr-row">
-                            <span class="mk">Expires</span>
-                            <span class="mv">15 Jan 2027</span>
-                            <!-- BACKEND: output expiry date -->
-                        </div>
-                        <hr class="mbr-divider-h">
-                        <div class="mbr-row">
-                            <span class="mk">Days Remaining</span>
-                            <span class="mv-green">234 days</span>
-                            <!-- BACKEND: output days remaining; use mv-warn if < 30 days -->
-                        </div>
-                    </div>
-                    <div class="mbr-card-foot">
-                        <a href="payment.html" class="btn-renew">Renew Membership</a>
-                        <!-- BACKEND: link to renewal/payment page -->
-                        <a href="#" class="btn-edit-profile">
-                            <i class="bi bi-pencil"></i> Edit My Profile
-                            <!-- BACKEND: link to profile_company.html / profile_investor / profile_expert based on role -->
-                        </a>
-                    </div>
-                </div>
-
                 <div class="profile-photo" style="background-image: url('assets/img/sidebar_image.jpg');">
                     <img src="assets/img/gbr_logo_blue.png" alt="" class="watermark" />
                 </div>
