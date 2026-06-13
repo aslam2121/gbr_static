@@ -8,8 +8,24 @@
 /* End Map */
 
 /* Start Chat */
-/* (Removed dead MDBootstrap form-outline/form-notch rules — the home-page
-   live chat now uses a standard Bootstrap input-group, no MDB dependency.) */
+/* GBR live-chat widget (shared across all pages that show the chat).
+   Markup: .chat-card > .chat-head / .chat-body (.bubble-them / .bubble-me) / .chat-input
+   Colours are literal GBR tokens so the widget works even on pages that
+   don't define the --gbr-* CSS custom properties. */
+.chat-card { background: #fff; box-shadow: 0 .125rem .25rem rgba(0,0,0,.06); border: 1px solid #e3e6e8; }
+.chat-head { background: #0083ae; color: #fff; padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.chat-head .dot { width: 9px; height: 9px; border-radius: 50%; background: #59d27d; box-shadow: 0 0 0 2px rgba(255,255,255,.4); flex-shrink: 0; }
+.chat-head .who { flex: 1; font-weight: 500; }
+.chat-head .actions { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+.chat-head .actions i { cursor: pointer; }
+.chat-body { padding: 14px 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+.bubble { max-width: 82%; padding: 9px 12px; font-size: 13.5px; line-height: 1.45; border-radius: 0; }
+.bubble-them { background: #0083ae; color: #fff; align-self: flex-start; }
+.bubble-me { background: #fff; color: #212529; align-self: flex-end; border: 1px solid #d6dadd; text-align: right; }
+.chat-input { background: #f7f7f7; display: flex; align-items: stretch; border-top: 1px solid #e3e6e8; }
+.chat-input input { flex: 1; border: 0; background: transparent; padding: 11px 12px; font-size: 13px; color: #495057; outline: none; font-family: inherit; }
+.chat-input button { background: #0083ae; color: #fff; border: 0; padding: 0 16px; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.chat-input button:hover { background: #046c8e; }
 /* End Chat */
 
 /* ========== GBR Navbar ========== */

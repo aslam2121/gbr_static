@@ -167,37 +167,15 @@
 
                     <!-- Member view: live chat (revealed by JS for logged-in members) -->
                     <div id="homeChatContent" style="display:none;">
-                    <div class="card" id="chat1" style="border-radius:15px;">
-                        <div class="card-header text-white d-flex justify-content-between align-items-center p-3 border-bottom-0" style="background-color:#0083ae;border-radius:0 15px 0 0;">
-                            <i class="bi bi-chevron-left"></i>
-                            <p class="fw-bold mb-0">Live chat</p>
-                            <i class="bi bi-x-lg"></i>
+                    <div class="chat-card">
+                        <div class="chat-head"><span class="dot"></span><span class="who">+00290-Rubin</span><span class="actions"><i class="bi bi-chat-dots"></i><i class="bi bi-camera-video"></i><i class="bi bi-paperclip"></i><i class="bi bi-square"></i><i class="bi bi-dash"></i></span></div>
+                        <div class="chat-body">
+                            <div class="bubble bubble-them">Hello<br/>How are you!</div>
+                            <div class="bubble bubble-me">Hello<br/>How are you!</div>
+                            <div class="bubble bubble-them">Regarding the proposed project we need to discuss further to make sure everything as on our plan, when its possible</div>
+                            <div class="bubble bubble-me">According to your company policies we will be able to do that if it works well for us too</div>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex flex-row justify-content-start mb-4">
-                                <div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
-                                <div class="p-3 ms-3" style="border-radius:15px;background-color:#e7f9fc;">
-                                    <p class="mb-0 small">Hi! Welcome to GBR. How can we help you get started today?</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row justify-content-end mb-4">
-                                <div class="p-3 me-3 text-white" style="border-radius:15px;background-color:#0083ae;max-width:80%;">
-                                    <p class="mb-0 small">Hi, I'd like to know more about joining as a company.</p>
-                                </div>
-                                <div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
-                            </div>
-                            <div class="d-flex flex-row justify-content-start mb-4">
-                                <div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
-                                <div class="p-3 ms-3" style="border-radius:15px;background-color:#e7f9fc;">
-                                    <p class="mb-0 small">Great! You can register in three quick steps. Want me to walk you through it?</p>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label class="visually-hidden" for="homeChatInput">Type your message</label>
-                                <input type="text" class="form-control" id="homeChatInput" placeholder="Type your message...">
-                                <button class="btn text-white" type="button" style="background-color:#0083ae;"><i class="bi bi-send"></i></button>
-                            </div>
-                        </div>
+                        <form class="chat-input" onsubmit="event.preventDefault()"><input type="text" value="Further to our previous discussion we will be able..." /><button type="submit" aria-label="Send"><i class="bi bi-send-fill"></i></button></form>
                     </div>
                     </div><!-- /#homeChatContent -->
                 </div>
