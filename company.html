@@ -265,36 +265,57 @@
                 </div>
                 <div class="col-lg-4" style="padding:0px;">
                     <div class="col-lg-12"><img class="object-fit-cover w-100 h-100 mx-auto img-responsive center-block" style="margin:0px;height:300px;" height="294" src="assets/img/sidebar_image.jpg" width="442"></div>
+                    <!-- ============================================================
+                         LIVE CHAT — members only (cleaned, pure Bootstrap; no MDB).
+                         Guests see a locked prompt; logged-in users see the chat.
+                         Gating driven by window.GBR_USER (see script at page end).
+                         ============================================================ -->
+                    <!-- Guest view: locked chat prompt (shown by default) -->
+                    <div id="liveChatLocked" class="d-flex flex-column align-items-center justify-content-center text-center" style="border:1px dashed #c8cdd1;background:#f7fafb;padding:28px;border-radius:15px;min-height:320px;margin-top:8px;">
+                        <i class="bi bi-chat-dots" style="font-size:40px;color:#0083ae;"></i>
+                        <h3 class="h6 mt-3 mb-2" style="color:#043443;">Sign in to use live chat</h3>
+                        <p class="text-muted small mb-3">Chat with the GBR team and your contacts once you're a member.</p>
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-primary btn-sm" href="login.html" style="background-color:#0083ae;border-color:#0083ae;">Sign in</a>
+                            <a class="btn btn-outline-primary btn-sm" href="register.html" style="color:#0083ae;border-color:#0083ae;">Register</a>
+                        </div>
+                    </div>
+
+                    <!-- Member view: live chat (revealed by JS for logged-in members) -->
+                    <div id="liveChatContent" style="display:none;">
                     <div class="card" id="chat1" style="border-radius:15px;">
-                        <div class="card-header text-white bg-primary d-flex justify-content-between align-items-center p-3 border-bottom-0" style="border-radius:0px 15px 0px 0px;border-top-left-radius:0px;border-top-right-radius:0px;"><i class="fas fa-angle-left"></i>
-                            <p class="fw-bold mb-0">Live chat</p><i class="fas fa-times"></i>
+                        <div class="card-header text-white d-flex justify-content-between align-items-center p-3 border-bottom-0" style="background-color:#0083ae;border-radius:0 15px 0 0;">
+                            <i class="bi bi-chevron-left"></i>
+                            <p class="fw-bold mb-0">Live chat</p>
+                            <i class="bi bi-x-lg"></i>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex flex-row justify-content-start mb-4"><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
-                                <div class="bg-primary p-3 ms-3" style="border-radius:15px;background-color:rgba(57, 192, 237,.2);">
-                                    <p class="text-light mb-0 small">Hello and thank you for visiting MDBootstrap. Please click the video below.</p>
+                            <div class="d-flex flex-row justify-content-start mb-4">
+                                <div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
+                                <div class="p-3 ms-3" style="border-radius:15px;background-color:#e7f9fc;">
+                                    <p class="mb-0 small">Hi! Welcome to GBR. How can we help you get started today?</p>
                                 </div>
                             </div>
                             <div class="d-flex flex-row justify-content-end mb-4">
-                                <div class="bg-body-tertiary border p-3 me-3" style="border-radius:15px;">
-                                    <p class="mb-0 small">Thank you, I really like your product.</p>
-                                </div><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
+                                <div class="p-3 me-3 text-white" style="border-radius:15px;background-color:#0083ae;max-width:80%;">
+                                    <p class="mb-0 small">Hi, I'd like to know more about joining GBR.</p>
+                                </div>
+                                <div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
                             </div>
-                            <div class="d-flex flex-row justify-content-start mb-4"><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
-                                <div class="ms-3" style="border-radius:15px;">
-                                    <div class="bg-image"><div style="width:100%;height:80px;background:#e6e7e8;border-radius:8px;display:flex;align-items:center;justify-content:center;"><i class="bi bi-play-circle" style="font-size:32px;color:#6c757d;"></i></div><a href="#!">
-                                            <div class="mask"></div>
-                                        </a></div>
+                            <div class="d-flex flex-row justify-content-start mb-4">
+                                <div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
+                                <div class="p-3 ms-3" style="border-radius:15px;background-color:#e7f9fc;">
+                                    <p class="mb-0 small">Great! You can register in three quick steps. Want me to walk you through it?</p>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row justify-content-start mb-4"><div style="width:45px;height:45px;background:#e6e7e8;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-person-fill" style="font-size:22px;color:#6c757d;"></i></div>
-                                <div class="bg-primary p-3 ms-3" style="border-radius:15px;background-color:rgba(57, 192, 237,.2);">
-                                    <p class="text-light mb-0 small">...</p>
-                                </div>
+                            <div class="input-group">
+                                <label class="visually-hidden" for="liveChatInput">Type your message</label>
+                                <input type="text" class="form-control" id="liveChatInput" placeholder="Type your message...">
+                                <button class="btn text-white" type="button" style="background-color:#0083ae;"><i class="bi bi-send"></i></button>
                             </div>
-                            <div data-mdb-input-init="" class="form-outline"><textarea class="bg-body-tertiary form-control" id="textAreaExample" rows="4"></textarea><label class="form-label" for="textAreaExample">Type your message</label></div>
                         </div>
                     </div>
+                    </div><!-- /#liveChatContent -->
                 </div>
             </div>
         </div>
@@ -556,6 +577,19 @@
                     if (locked)  locked.style.display  = 'flex';
                 }
             });
+        })();
+    </script>
+
+    <!-- Live chat access gate: shown to logged-in members; guests see the sign-in prompt.
+         Uses the same window.GBR_USER object as the permission system above. -->
+    <script>
+        (function () {
+            var user = window.GBR_USER || { loggedIn: false };
+            var allowed = !!user.loggedIn;
+            var c = document.getElementById("liveChatContent");
+            var l = document.getElementById("liveChatLocked");
+            if (c) c.style.display = allowed ? "block" : "none";
+            if (l) l.style.display = allowed ? "none" : "flex";
         })();
     </script>
 </body>
