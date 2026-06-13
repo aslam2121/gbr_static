@@ -24,23 +24,23 @@
 <body>
     <header class="bg-light">
         <div id="navbar-placeholder"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="fw-semibold text-center d-flex justify-content-center align-items-center m-2">Welcome to GBR</p>
-                    <form class="d-flex w-100 flex-column align-items-center gap-3 flex-md-row">
-                        <div class="w-100"><label class="visually-hidden" for="autoSizingInputMessagingTop">Username</label><input class="form-control form-control form-control" type="text" id="autoSizingInputMessagingTop" placeholder="Username"></div>
-                        <div class="w-100 flex-fill"><label class="visually-hidden" for="autoSizingInputGroupMessagingTop">Password</label><input class="form-control form-control form-control" type="password" id="autoSizingInputGroupMessagingTop" placeholder="Password"></div>
-                        <div class="form-check"><input type="checkbox" class="form-check-input" id="autoSizingCheckMessagingTop"><label class="form-check-label" for="autoSizingCheckMessagingTop"> Remember me </label></div>
-                        <p class="mb-0"><a href="#">Forgot Password?</a></p>
-                        <div class="d-flex w-100 flex-row justify-content-center gap-2 justify-content-md-start w-md-auto"><button class="btn btn-primary flex-fill flex-md-auto" type="submit" style="background-color:#0083ae;border-color:#0083ae;border-width:3px;color:#fff;"> Sign in </button><button class="btn btn-primary flex-fill flex-md-auto" type="submit" style="background-color:#0083ae;border-color:#0083ae;border-width:3px;color:#fff;"> Sign up </button></div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </header>
     <main class="bg-light py-5">
         <div class="container">
+
+            <!-- Guest view: locked sign-in prompt (shown by default; hidden by JS for members) -->
+            <div id="messagingLocked" class="perm-locked d-flex flex-column align-items-center justify-content-center text-center mx-auto" style="max-width:520px;min-height:380px;border:1px dashed #c8cdd1;background:#f7fafb;padding:36px;">
+                <i class="bi bi-chat-dots" style="font-size:48px;color:#0083ae;"></i>
+                <h1 class="h4 mt-3 mb-2" style="color:#043443;">Sign in to access your messages</h1>
+                <p class="text-muted mb-4">Messaging is available to GBR members. Sign in or register to connect with companies, investors, and experts.</p>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-primary" href="login.html" style="background-color:#0083ae;border-color:#0083ae;">Sign in</a>
+                    <a class="btn btn-outline-primary" href="register.html" style="color:#0083ae;border-color:#0083ae;">Register</a>
+                </div>
+            </div>
+
+            <!-- Member view: full inbox (revealed by JS for logged-in members) -->
+            <div id="messagingContent" class="perm-content" style="display:none;">
             <div class="row mb-4">
                 <div class="col-lg-9">
                     <h1 class="h2 mb-2">Business Messaging</h1>
@@ -139,11 +139,50 @@
                     </div>
                 </div>
             </div>
+            </div><!-- /#messagingContent -->
         </div>
     </main>
     <div id="footer-placeholder"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <!--
+    ============================================================
+    BACKEND DEVELOPER — MESSAGING ACCESS GATE
+    ============================================================
+    Messaging is a member-only feature. The inbox below is shown
+    only to logged-in members who have the "send_message"
+    permission; everyone else sees the locked sign-in prompt.
+
+    Set window.GBR_USER from your server-side template BEFORE the
+    gate script runs:
+
+        window.GBR_USER = {
+            loggedIn: true,
+            permissions: ["send_message"]
+        };
+
+    The conversations shown are DUMMY demo data for the client
+    preview — replace the contents of #messagingContent with real
+    data. If window.GBR_USER is absent or the permission is
+    missing, the guest prompt is shown instead.
+    ============================================================
+    -->
+
+    <!-- DEMO ONLY: ships logged-in so the client can preview the member view.
+         Backend dev: delete this block and inject the real window.GBR_USER. -->
+    <script>
+        window.GBR_USER = { loggedIn: true, permissions: ["send_message"] };
+    </script>
+
+    <script>
+        (function () {
+            var user = window.GBR_USER || { loggedIn: false, permissions: [] };
+            var allowed = user.loggedIn && (user.permissions || []).indexOf("send_message") !== -1;
+            document.getElementById("messagingContent").style.display = allowed ? "block" : "none";
+            document.getElementById("messagingLocked").style.display  = allowed ? "none" : "flex";
+        })();
+    </script>
 </body>
 
 </html>

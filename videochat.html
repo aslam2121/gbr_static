@@ -42,6 +42,19 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
+                        <!-- Guest view: locked sign-in prompt (shown by default; hidden by JS for members) -->
+                        <div id="videoLocked" class="perm-locked d-flex flex-column align-items-center justify-content-center text-center mx-auto" style="max-width:560px;min-height:380px;border:1px dashed #c8cdd1;background:#f7fafb;padding:36px;">
+                            <i class="bi bi-camera-video-off" style="font-size:48px;color:#0083ae;"></i>
+                            <h2 class="h4 mt-3 mb-2" style="color:#043443;">Sign in to join or start a video meeting</h2>
+                            <p class="text-muted mb-4">Video conferencing is available to GBR members. Sign in or register to host and join meetings with your contacts.</p>
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-primary" href="login.html" style="background-color:#0083ae;border-color:#0083ae;">Sign in</a>
+                                <a class="btn btn-outline-primary" href="register.html" style="color:#0083ae;border-color:#0083ae;">Register</a>
+                            </div>
+                        </div>
+
+                        <!-- Member view: conference + meetings (revealed by JS for logged-in members) -->
+                        <div id="videoContent" class="perm-content" style="display:none;">
                         <div class="card shadow-lg">
                             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                                 <h2 class="h5 mb-0"><i class="bi bi-camera-video me-2"></i>Video Conference</h2>
@@ -105,6 +118,7 @@
                                 </div>
                             </div>
                         </div>
+                        </div><!-- /#videoContent -->
                     </div>
                 </div>
             </div>
@@ -114,6 +128,45 @@
     <div id="footer-placeholder"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <!--
+    ============================================================
+    BACKEND DEVELOPER — VIDEO CHAT ACCESS GATE
+    ============================================================
+    Video conferencing is a member-only feature. The conference
+    UI and upcoming-meetings list are shown only to logged-in
+    members who have the "video_call" permission; everyone else
+    sees the locked sign-in prompt.
+
+    Set window.GBR_USER from your server-side template BEFORE the
+    gate script runs:
+
+        window.GBR_USER = {
+            loggedIn: true,
+            permissions: ["video_call"]
+        };
+
+    The Meeting ID and upcoming meetings are DUMMY demo data for
+    the client preview — replace the contents of #videoContent
+    with real data. If window.GBR_USER is absent or the
+    permission is missing, the guest prompt is shown instead.
+    ============================================================
+    -->
+
+    <!-- DEMO ONLY: ships logged-in so the client can preview the member view.
+         Backend dev: delete this block and inject the real window.GBR_USER. -->
+    <script>
+        window.GBR_USER = { loggedIn: true, permissions: ["video_call"] };
+    </script>
+
+    <script>
+        (function () {
+            var user = window.GBR_USER || { loggedIn: false, permissions: [] };
+            var allowed = user.loggedIn && (user.permissions || []).indexOf("video_call") !== -1;
+            document.getElementById("videoContent").style.display = allowed ? "block" : "none";
+            document.getElementById("videoLocked").style.display  = allowed ? "none" : "flex";
+        })();
+    </script>
 </body>
 
 </html>

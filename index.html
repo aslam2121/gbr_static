@@ -60,61 +60,91 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-0" style="padding:0px;">
-                    <div id="map"></div><script src="https://unpkg.com/leaflet/dist/leaflet.js"></script><script>
-              var map = L.map("map", {
-                minZoom: 2,
-                maxZoom: 6,
-                zoomControl: true,
-                attributionControl: false,
-              }).setView([40, 0], 2);
+                    <!-- ============================================================
+                         COMPANY DRILL-DOWN MAP — members only.
+                         Guests see a locked prompt; logged-in users see the
+                         interactive map. Gating is driven by window.GBR_USER,
+                         which the backend sets after login (see the backend
+                         note + script near the bottom of this page).
+                         ============================================================ -->
+                    <!-- Member view: interactive map (revealed by JS when logged in) -->
+                    <div id="mapContent" style="display:none;">
+                        <div id="map"></div>
+                    </div>
+                    <!-- Guest view: locked map prompt (shown by default) -->
+                    <div id="mapLocked" class="d-flex flex-column align-items-center justify-content-center text-center" style="height:800px;border:2px dashed #ccc;background:#f7fafb;padding:24px;">
+                        <i class="bi bi-lock-fill" style="font-size:48px;color:#0083ae;"></i>
+                        <h3 class="h5 mt-3 mb-2" style="color:#043443;">Explore companies on the interactive map</h3>
+                        <p class="text-muted mb-4" style="max-width:380px;">Register or sign in to drill down by country and discover companies, investors, and experts across the globe.</p>
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-primary" href="#" style="background-color:#0083ae;border-color:#0083ae;">Sign in</a>
+                            <a class="btn btn-outline-primary" href="register.html" style="color:#0083ae;border-color:#0083ae;">Register</a>
+                        </div>
+                    </div>
+                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script><script>
+              (function () {
+                // Only initialise the map for logged-in users.
+                var user = window.GBR_USER || { loggedIn: false };
+                if (!user.loggedIn) return;   // guest — leave the map locked
 
-              // Style
-              function style(feature) {
-                return {
-                  fillColor: "#043443",
-                  weight: 1,
-                  opacity: 1,
-                  color: "#0582ad",
-                  fillOpacity: 0.7,
-                };
-              }
+                document.getElementById("mapContent").style.display = "block";
+                document.getElementById("mapLocked").style.display = "none";
 
-              function highlightStyle() {
-                return {
-                  fillColor: "#42a5f5",
-                  weight: 2,
-                  color: "#1e88e5",
-                };
-              }
+                var map = L.map("map", {
+                  minZoom: 2,
+                  maxZoom: 6,
+                  zoomControl: true,
+                  attributionControl: false,
+                }).setView([40, 0], 2);
 
-              // Interaction
-              function onEachFeature(feature, layer) {
-                layer.on({
-                  click: function () {
-                    // click handler — wire up to your routing logic
-                  },
-                  mouseover: function () {
-                    layer.setStyle(highlightStyle());
-                  },
-                  mouseout: function () {
-                    layer.setStyle(style(feature));
-                  },
-                });
-              }
+                // Style
+                function style(feature) {
+                  return {
+                    fillColor: "#043443",
+                    weight: 1,
+                    opacity: 1,
+                    color: "#0582ad",
+                    fillOpacity: 0.7,
+                  };
+                }
 
-              // Load GeoJSON (reliable dataset)
-              fetch(
-                "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
-              )
-                .then((res) => res.json())
-                .then((data) => {
-                  var geojsonLayer = L.geoJSON(data, {
-                    style: style,
-                    onEachFeature: onEachFeature,
-                  }).addTo(map);
+                function highlightStyle() {
+                  return {
+                    fillColor: "#42a5f5",
+                    weight: 2,
+                    color: "#1e88e5",
+                  };
+                }
 
-                  map.fitBounds(geojsonLayer.getBounds());
-                });
+                // Interaction
+                function onEachFeature(feature, layer) {
+                  layer.on({
+                    click: function () {
+                      // click handler — wire up to your routing logic
+                    },
+                    mouseover: function () {
+                      layer.setStyle(highlightStyle());
+                    },
+                    mouseout: function () {
+                      layer.setStyle(style(feature));
+                    },
+                  });
+                }
+
+                // Load GeoJSON (reliable dataset)
+                fetch(
+                  "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
+                )
+                  .then((res) => res.json())
+                  .then((data) => {
+                    var geojsonLayer = L.geoJSON(data, {
+                      style: style,
+                      onEachFeature: onEachFeature,
+                    }).addTo(map);
+
+                    map.fitBounds(geojsonLayer.getBounds());
+                  });
+              })();
             </script>
                 </div>
                 <div class="col-lg-4" style="padding:0px;">
@@ -154,6 +184,24 @@
         </div>
     </section>
     <div id="footer-placeholder"></div>
+
+    <!--
+    ============================================================
+    BACKEND DEVELOPER — UNLOCK THE COMPANY MAP
+    ============================================================
+    The interactive drill-down map is locked for guests. To reveal
+    it for a logged-in user, output window.GBR_USER BEFORE the map
+    script runs (e.g. inject it server-side near the top of <body>):
+
+        <script>
+            window.GBR_USER = { loggedIn: true };
+        </script>
+
+    If window.GBR_USER is absent or loggedIn is false, the guest
+    "register or sign in" prompt is shown instead of the map.
+    ============================================================
+    -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/custom.js"></script>
 </body>
