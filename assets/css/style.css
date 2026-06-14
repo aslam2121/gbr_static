@@ -1,3 +1,24 @@
+/* ===== Consistent max content width across the whole site =====
+   The site has two page families with different width behaviour:
+   - "GBR design-system" pages (register, member_home, search_*, payment,
+     register_confirmation) are full-bleed via <main>.
+   - Bootstrap-container pages (index, about, company, etc.) cap content with
+     .container, which Bootstrap limits to 1320px and centres.
+   This block converges both on one cap (1600px), centred: the full-width
+   pages' <main> is capped, and the .container cap is widened to match and
+   made to fill the width from 1200px up, so the two families line up. */
+:root { --gbr-max-width: 1600px; }
+main { max-width: var(--gbr-max-width); margin-inline: auto; }
+@media (min-width: 1200px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl { max-width: var(--gbr-max-width); }
+}
+/* ===== End max content width ===== */
+
 /* Start Map */
 
 #map {
