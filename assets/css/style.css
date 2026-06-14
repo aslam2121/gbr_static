@@ -1,14 +1,16 @@
 /* ===== Consistent max content width across the whole site =====
-   The site has two page families with different width behaviour:
+   The site has two page families:
    - "GBR design-system" pages (register, member_home, search_*, payment,
      register_confirmation) are full-bleed via <main>.
    - Bootstrap-container pages (index, about, company, etc.) cap content with
      .container, which Bootstrap limits to 1320px and centres.
-   This block converges both on one cap (1600px), centred: the full-width
-   pages' <main> is capped, and the .container cap is widened to match and
-   made to fill the width from 1200px up, so the two families line up. */
+   Both converge on one content cap (1600px), centred, while page/strip
+   BACKGROUNDS stay full-bleed. */
 :root { --gbr-max-width: 1600px; }
-main { max-width: var(--gbr-max-width); margin-inline: auto; }
+
+/* Bootstrap-container pages: widen the default 1320px cap to 1600px and let
+   .container fill the width from 1200px up. The section/main backgrounds
+   bleed full-width; only the content column is capped. */
 @media (min-width: 1200px) {
   .container,
   .container-sm,
@@ -17,6 +19,20 @@ main { max-width: var(--gbr-max-width); margin-inline: auto; }
   .container-xl,
   .container-xxl { max-width: var(--gbr-max-width); }
 }
+
+/* Full-bleed GBR pages: keep the coloured strips edge-to-edge but centre their
+   CONTENT in the same 1600px column on very wide screens. From 1652px up the
+   horizontal padding equals the strips' default (26px) and grows past it, so
+   content centres while each strip's background still spans the full width. */
+@media (min-width: 1652px) {
+  .welcome-strip,
+  .greeting-strip,
+  .hero-row,
+  .reg-main,
+  .main-section {
+    padding-inline: calc((100% - var(--gbr-max-width)) / 2) !important;
+  }
+}
 /* ===== End max content width ===== */
 
 /* Start Map */
@@ -24,6 +40,15 @@ main { max-width: var(--gbr-max-width); margin-inline: auto; }
 #map {
   height: 800px;
   border: 2px solid #ccc;
+}
+
+/* Map (and the guest locked-map card) are far too tall on small screens —
+   800px swallows a whole phone viewport. Scale them down responsively. */
+@media (max-width: 991.98px) {
+  #map, #mapLocked { height: 420px !important; }
+}
+@media (max-width: 575.98px) {
+  #map, #mapLocked { height: 320px !important; }
 }
 
 /* End Map */
