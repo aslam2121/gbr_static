@@ -504,8 +504,15 @@
                                 <span class="box"></span>
                             </label>
                         </div>
+                        <!-- Company sub-type: Established companies vs US startups raising funds.
+                             JS toggles body.startup-mode, which swaps the filter set + result badges. -->
+                        <div class="subtype-toggle">
+                            <button type="button" class="subtype-pill active" data-mode="established">Established</button>
+                            <button type="button" class="subtype-pill" data-mode="startup">Startup (Fundraising)</button>
+                        </div>
                         <div class="search-body">
-                            <div>
+                            <!-- Established-company filters -->
+                            <div class="est-filter">
                                 <p class="field-label">Continent</p>
                                 <select class="gbr-select">
                                     <option>Africa</option>
@@ -515,7 +522,7 @@
                                     <option>Oceania</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="est-filter">
                                 <p class="field-label">Country</p>
                                 <select class="gbr-select">
                                     <option>South Africa</option>
@@ -524,7 +531,7 @@
                                     <option>Egypt</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="est-filter">
                                 <p class="field-label">Location</p>
                                 <select class="gbr-select">
                                     <option>Cape Town</option>
@@ -532,7 +539,7 @@
                                     <option>Durban</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="est-filter">
                                 <p class="field-label">Area of Specification</p>
                                 <select class="gbr-select">
                                     <option>Financial Services</option>
@@ -541,7 +548,53 @@
                                     <option>Energy</option>
                                 </select>
                             </div>
-                            <p class="results-count m-0">We found <strong>82 Results</strong><br/>for Company</p>
+
+                            <!-- Startup (US fundraising) filters — country is fixed to United States -->
+                            <div class="startup-filter">
+                                <p class="field-label">US State</p>
+                                <select class="gbr-select">
+                                    <option>California</option>
+                                    <option>Texas</option>
+                                    <option>New York</option>
+                                    <option>Florida</option>
+                                    <option>Massachusetts</option>
+                                    <option>Washington</option>
+                                </select>
+                            </div>
+                            <div class="startup-filter">
+                                <p class="field-label">Funding Stage</p>
+                                <select class="gbr-select">
+                                    <option>Pre-seed</option>
+                                    <option>Seed</option>
+                                    <option>Series A</option>
+                                    <option>Series B</option>
+                                    <option>Series C+</option>
+                                </select>
+                            </div>
+                            <div class="startup-filter">
+                                <p class="field-label">Sector</p>
+                                <select class="gbr-select">
+                                    <option>Technology</option>
+                                    <option>Robotics &amp; Automation</option>
+                                    <option>Fintech</option>
+                                    <option>Healthcare</option>
+                                    <option>Clean Energy</option>
+                                </select>
+                            </div>
+                            <div class="startup-filter">
+                                <p class="field-label">Amount Raising</p>
+                                <select class="gbr-select">
+                                    <option>Under $500K</option>
+                                    <option>$500K &ndash; $1M</option>
+                                    <option>$1M &ndash; $5M</option>
+                                    <option>$5M+</option>
+                                </select>
+                            </div>
+
+                            <p class="results-count m-0">
+                                <span class="est-only">We found <strong>82 Results</strong><br/>for Company</span>
+                                <span class="startup-only">We found <strong>17 Startups</strong><br/>raising in the US</span>
+                            </p>
                             <button class="btn-search" type="button">Search</button>
                         </div>
                     </div>
@@ -712,6 +765,27 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <!-- Established / Startup sub-type toggle: swaps the filter set (CSS via
+         body.startup-mode) and opens the startup detail page from a result. -->
+    <script>
+        (function () {
+            var pills = document.querySelectorAll('.subtype-pill');
+            if (!pills.length) return;
+            pills.forEach(function (p) {
+                p.addEventListener('click', function () {
+                    pills.forEach(function (x) { x.classList.remove('active'); });
+                    p.classList.add('active');
+                    document.body.classList.toggle('startup-mode', p.dataset.mode === 'startup');
+                });
+            });
+            var list = document.querySelector('.contacts-list:not(.contacts-list-phones)');
+            if (list) list.addEventListener('click', function (e) {
+                if (!document.body.classList.contains('startup-mode')) return;
+                if (e.target.closest('.contact-item')) window.location.href = 'company_startup.html';
+            });
+        })();
+    </script>
 
 </body>
 </html>

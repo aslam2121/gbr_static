@@ -74,6 +74,34 @@
 .chat-input button:hover { background: #046c8e; }
 /* End Chat */
 
+/* Fundraising badge — marks startup (US fundraising) companies in search result lists */
+.badge-fund { display: inline-block; background: #0083ae; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; vertical-align: middle; letter-spacing: .02em; }
+
+/* ===== Company search: Established vs Startup (fundraising) sub-type =====
+   Shared by search_company.html and member_home.html. A small JS handler
+   toggles body.startup-mode; everything below is driven by that class. */
+.subtype-toggle { background: #f3f4f5; padding: 10px 22px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.subtype-pill { background: #fff; border: 1px solid #b6bcc0; color: #495057; font-size: 13px; font-weight: 500; padding: 5px 14px; border-radius: 20px; cursor: pointer; font-family: inherit; }
+.subtype-pill.active { background: #0083ae; border-color: #0083ae; color: #fff; }
+.startup-filter { display: none; }   /* shown only in startup mode */
+.startup-only { display: none; }     /* startup-mode-only text */
+body.startup-mode .est-filter { display: none; }
+body.startup-mode .startup-filter { display: block; }
+body.startup-mode .est-only { display: none; }
+body.startup-mode .startup-only { display: inline; }
+/* Append a "Fundraising" tag to each company result name in startup mode.
+   Scoped to the company search list, not member_home's phone-style contacts. */
+body.startup-mode .contacts-list:not(.contacts-list-phones) .contact-item .name::after {
+  content: "Fundraising";
+  display: inline-block;
+  background: #0083ae; color: #fff;
+  font-size: 10px; font-weight: 600;
+  padding: 1px 7px; border-radius: 9px;
+  margin-left: 8px; vertical-align: middle;
+}
+body.startup-mode .contacts-list:not(.contacts-list-phones) .contact-item { cursor: pointer; }
+/* ===== End company sub-type ===== */
+
 /* ========== GBR Navbar ========== */
 .gbr-navbar {
   background: #043443;
