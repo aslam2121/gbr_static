@@ -102,10 +102,6 @@ body.startup-mode .contacts-list:not(.contacts-list-phones) .contact-item .name:
 body.startup-mode .contacts-list:not(.contacts-list-phones) .contact-item { cursor: pointer; }
 /* ===== End company sub-type ===== */
 
-/* Registration: company Established/Startup sub-type */
-.startup-field { display: none; }
-#s2-company.startup-selected .startup-field { display: block; }
-
 /* ========== GBR Navbar ========== */
 .gbr-navbar {
   background: #043443;
