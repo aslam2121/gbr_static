@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <div class="home-screen">
     <header class="bg-light">
         <div id="navbar-placeholder"></div>
         <div class="container">
@@ -39,24 +40,24 @@
             </div>
         </div>
     </header>
-    <section class="bg-light">
+    <section class="bg-light home-hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center" style="background: #f9efe3;min-height: 200px;">
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center" style="background: #f9efe3;">
                     <p class="text-capitalize fw-semibold text-center text-sm-center text-md-center text-lg-center text-xl-center text-xxl-center d-flex"> Your Business Highway to Opportunities </p><img class="d-flex img-responsive center-block" src="assets/img/gbr%20logo.png" height="86">
                 </div>
-                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center" style="background-color:#e7f9fc;min-height:200px;">
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center" style="background-color:#e7f9fc;">
                     <p class="text-capitalize fw-semibold text-center"> Take your Business Meetings to Next level </p>
                     <p class="text-capitalize fw-normal text-center mt-xl-4"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla omnis distinctio voluptatum quod, eaque dolorum voluptate quis nostrum ipsum, </p>
                 </div>
-                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center" style="background-color: #f9efe3;min-height: 200px;">
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center" style="background-color: #f9efe3;">
                     <p class="text-capitalize fw-semibold text-center"> Join now, its Free<br> to take the advantageous of our Networking.</p>
                     <p class="text-capitalize fw-normal text-center mt-xl-4"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non minima ipsum deleniti maxime. </p><a class="btn btn-primary ps-3 pe-3" role="button" href="#">Yes I want to Join</a>
                 </div>
             </div>
         </div>
     </section>
-    <section>
+    <section class="home-main">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-0" style="padding:0px;">
@@ -68,11 +69,11 @@
                          note + script near the bottom of this page).
                          ============================================================ -->
                     <!-- Member view: interactive map (revealed by JS when logged in) -->
-                    <div id="mapContent" style="display:none;">
+                    <div id="mapContent" class="d-none">
                         <div id="map"></div>
                     </div>
                     <!-- Guest view: locked map prompt (shown by default) -->
-                    <div id="mapLocked" class="d-flex flex-column align-items-center justify-content-center text-center" style="height:800px;border:2px dashed #ccc;background:#f7fafb;padding:24px;">
+                    <div id="mapLocked" class="d-flex flex-column align-items-center justify-content-center text-center" style="border:2px dashed #ccc;background:#f7fafb;">
                         <i class="bi bi-lock-fill" style="font-size:48px;color:#0083ae;"></i>
                         <h3 class="h5 mt-3 mb-2" style="color:#043443;">Explore companies on the interactive map</h3>
                         <p class="text-muted mb-4" style="max-width:380px;">Register or sign in to drill down by country and discover companies, investors, and experts across the globe.</p>
@@ -87,8 +88,8 @@
                 var user = window.GBR_USER || { loggedIn: false };
                 if (!user.loggedIn) return;   // guest — leave the map locked
 
-                document.getElementById("mapContent").style.display = "block";
-                document.getElementById("mapLocked").style.display = "none";
+                document.getElementById("mapContent").classList.remove("d-none");
+                document.getElementById("mapLocked").classList.add("d-none");
 
                 var map = L.map("map", {
                   minZoom: 2,
@@ -148,14 +149,14 @@
             </script>
                 </div>
                 <div class="col-lg-4" style="padding:0px;">
-                    <div class="col-lg-12"><img class="object-fit-cover w-100 h-100 mx-auto img-responsive center-block" style="margin:0px;height:300px;" height="294" src="assets/img/sidebar_image.jpg" width="442"></div>
+                    <div class="col-lg-12 home-photo"><img class="object-fit-cover w-100 h-100 mx-auto img-responsive center-block" style="margin:0px;" height="294" src="assets/img/sidebar_image.jpg" width="442"></div>
                     <!-- ============================================================
                          LIVE CHAT — members only (cleaned, pure Bootstrap; no MDB).
                          Guests see a locked prompt; logged-in users see the chat.
                          Gating driven by window.GBR_USER (see script at page end).
                          ============================================================ -->
                     <!-- Guest view: locked chat prompt (shown by default) -->
-                    <div id="homeChatLocked" class="d-flex flex-column align-items-center justify-content-center text-center" style="border:1px dashed #c8cdd1;background:#f7fafb;padding:28px;border-radius:15px;min-height:320px;margin-top:8px;">
+                    <div id="homeChatLocked" class="d-flex flex-column align-items-center justify-content-center text-center" style="border:1px dashed #c8cdd1;background:#f7fafb;border-radius:15px;">
                         <i class="bi bi-chat-dots" style="font-size:40px;color:#0083ae;"></i>
                         <h3 class="h6 mt-3 mb-2" style="color:#043443;">Sign in to use live chat</h3>
                         <p class="text-muted small mb-3">Chat with the GBR team and your contacts once you're a member.</p>
@@ -166,7 +167,7 @@
                     </div>
 
                     <!-- Member view: live chat (revealed by JS for logged-in members) -->
-                    <div id="homeChatContent" style="display:none;">
+                    <div id="homeChatContent" class="d-none">
                     <div class="chat-card">
                         <div class="chat-head"><span class="dot"></span><span class="who">+00290-Rubin</span><span class="actions"><i class="bi bi-chat-dots"></i><i class="bi bi-camera-video"></i><i class="bi bi-paperclip"></i><i class="bi bi-square"></i><i class="bi bi-dash"></i></span></div>
                         <div class="chat-body">
@@ -182,6 +183,7 @@
             </div>
         </div>
     </section>
+    </div>
     <div id="footer-placeholder"></div>
 
     <!--
@@ -209,8 +211,8 @@
         (function () {
             var user = window.GBR_USER || { loggedIn: false };
             var allowed = !!user.loggedIn;
-            document.getElementById("homeChatContent").style.display = allowed ? "block" : "none";
-            document.getElementById("homeChatLocked").style.display  = allowed ? "none" : "flex";
+            document.getElementById("homeChatContent").classList.toggle("d-none", !allowed);
+            document.getElementById("homeChatLocked").classList.toggle("d-none", allowed);
         })();
     </script>
 

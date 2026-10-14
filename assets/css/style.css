@@ -53,6 +53,62 @@
 
 /* End Map */
 
+/* ===== Home page — fit one laptop screen (feature 003) =====
+   Stacked layout (< 992px) keeps the values below, moved unchanged from inline styles.
+   The fitted layout (>= 992px) follows in the media blocks. */
+.home-hero .row > div { min-height: 200px; }
+#mapLocked { height: 800px; padding: 24px; }
+#homeChatLocked { padding: 28px; min-height: 320px; margin-top: 8px; }
+
+/* Fitted layout: header, tiles and map row fill one screen; the footer sits below. */
+@media (min-width: 992px) {
+  .home-screen { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+
+  /* Welcome strip: label beside the sign-in fields (.m-2 is !important) */
+  .home-screen > header > .container .col { display: flex; align-items: center; gap: 16px; padding-block: 8px; }
+  .home-screen > header > .container .col > p { margin: 0 !important; white-space: nowrap; flex: 0 0 auto; }
+  .home-screen > header > .container .col > form { flex: 1 1 auto; }
+
+  /* Tiles: content height instead of a 200px floor */
+  .home-hero .row > div { min-height: 0; padding-block: 8px; }
+  .home-hero .row > div p { margin-bottom: 4px; }
+  .home-hero .mt-xl-4 { margin-top: 4px !important; }
+  .home-hero img { height: 56px; }
+
+  /* Map row takes the remaining height (288px floor, then the page scrolls).
+     The pinned container gives the columns a height their children can resolve. */
+  .home-main { flex: 1 0 288px; min-height: 288px; position: relative; }
+  .home-main > .container { position: absolute; inset: 0; }
+  .home-main > .container > .row { height: 100%; }
+  .home-main > .container > .row > div { height: 100%; }
+  #mapLocked { height: 100%; padding: 8px 24px; }
+
+  /* Sidebar: photo banner cropped by width (10:3 shows the printed slogan), chat below */
+  .home-main .col-lg-4 { display: flex; flex-direction: column; }
+  .home-photo { flex: 0 0 auto; aspect-ratio: 10 / 3; overflow: hidden; }
+  .home-photo img { object-position: center 30%; }
+
+  /* Guest chat prompt fills the rest (icon inline size and Bootstrap margins are overridden) */
+  #homeChatLocked { flex: 1 1 auto; min-height: 0; padding: 4px 12px; }
+  #homeChatLocked .bi { font-size: 1.75rem !important; line-height: 1; }
+  #homeChatLocked h3 { margin-top: 0 !important; margin-bottom: 4px !important; }
+  #homeChatLocked p { margin-bottom: 4px !important; }
+
+  /* Member view: map fills its panel; chat fills the sidebar and its messages scroll inside.
+     Shared .chat-* appearance is unchanged; only sized here. .d-none still hides these for guests. */
+  #mapContent, #map { height: 100%; }
+  #homeChatContent { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; margin-top: 8px; }
+  #homeChatContent .chat-card { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+  #homeChatContent .chat-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+}
+
+/* Tall enough for a 2:1 banner: show the logo and the slogan printed in the photo */
+@media (min-width: 992px) and (min-height: 760px) {
+  .home-photo { aspect-ratio: 2 / 1; }
+  .home-photo img { object-position: top; }
+}
+/* ===== End Home page ===== */
+
 /* Start Chat */
 /* GBR live-chat widget (shared across all pages that show the chat).
    Markup: .chat-card > .chat-head / .chat-body (.bubble-them / .bubble-me) / .chat-input
