@@ -10,3 +10,11 @@ assets/includes/
 !.dev.vars.example
 .env*
 !.env.example
+
+# editor and OS files
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
